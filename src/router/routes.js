@@ -7,9 +7,24 @@ export default [
     component: () => lazyLoadView(import('@views/home.vue')),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => lazyLoadView(import('@views/login.vue')),
+    path: '/blog',
+    name: 'Blog de cocina',
+    component: () => lazyLoadView(import('@views/blog.vue')),
+  },
+  {
+    path: '/productos',
+    name: 'Catalogo de productos',
+    component: () => lazyLoadView(import('@views/marketplace.vue')),
+  },
+  {
+    path: '/reservas',
+    name: 'Reservas Kutral',
+    component: () => lazyLoadView(import('@views/bookings.vue')),
+  },
+  {
+    path: '/admin-login',
+    name: 'loginAdmin',
+    component: () => lazyLoadView(import('@views/loginAdmin.vue')),
     meta: {
       beforeResolve(routeTo, routeFrom, next) {
         // If the user is already logged in
@@ -24,9 +39,9 @@ export default [
     },
   },
   {
-    path: '/profile',
-    name: 'profile',
-    component: () => lazyLoadView(import('@views/profile.vue')),
+    path: '/admin',
+    name: 'admin',
+    component: () => lazyLoadView(import('@views/admin.vue')),
     meta: {
       authRequired: true,
     },
@@ -35,7 +50,7 @@ export default [
   {
     path: '/profile/:username',
     name: 'username-profile',
-    component: () => lazyLoadView(import('@views/profile.vue')),
+    component: () => lazyLoadView(import('@views/admin.vue')),
     meta: {
       authRequired: true,
       // HACK: In order to share data between the `beforeResolve` hook

@@ -29,7 +29,13 @@ export default {
         to={route}
         exact-active-class={$style.active}
       >
-        <a>{getRouteTitle(route)}</a>
+        <a>
+          <img
+            src={require(`../assets/images/${route.icon}.png`)}
+            alt='icono'
+          />
+          {getRouteTitle(route)}
+        </a>
       </BaseLink>
     ))
   },

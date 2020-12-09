@@ -11,10 +11,22 @@ export default {
           name: 'home',
           title: 'Home',
         },
+        {
+          name: 'Blog de cocina',
+          title: 'Blog de cocina',
+        },
+        {
+          name: 'Catalogo de productos',
+          title: 'Catalogo de productos',
+        },
+        {
+          name: 'Reservas Kutral',
+          title: 'Reservas Kutral',
+        },
       ],
       loggedInNavRoutes: [
         {
-          name: 'profile',
+          name: 'admin',
           title: () => 'Logged in as ' + this.currentUser.name,
         },
         {
@@ -24,8 +36,8 @@ export default {
       ],
       loggedOutNavRoutes: [
         {
-          name: 'login',
-          title: 'Log in',
+          name: 'loginAdmin',
+          title: 'Admin',
         },
       ],
     }
@@ -56,6 +68,12 @@ export default {
   > li {
     display: inline-block;
     margin-right: $size-grid-padding;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    display: none;
   }
 }
 </style>

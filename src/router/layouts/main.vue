@@ -1,14 +1,16 @@
 <script>
 import NavBar from '@components/nav-bar.vue'
+import BottomNavbar from '@components/bottomNavbar.vue'
 
 export default {
-  components: { NavBar },
+  components: { NavBar, BottomNavbar },
 }
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div>
     <NavBar />
+    <BottomNavbar />
     <slot />
   </div>
 </template>
