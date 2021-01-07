@@ -28,17 +28,21 @@ export default {
           icon: 'bookings_icon',
         },
       ],
+      route: this.$router.currentRoute.path,
     }
   },
   computed: {
     ...authComputed,
   },
+  // created() {
+  //   console.log(this.route)
+  // },
 }
 </script>
 
 <template>
   <ul :class="$style.bottomNav">
-    <NavBarRoutes :routes="persistentNavRoutes" />
+    <NavBarRoutes :routes="persistentNavRoutes" :current-route="route" />
   </ul>
 </template>
 
@@ -56,11 +60,12 @@ export default {
     display: flex;
     align-items: flex-end;
     width: 100%;
-    padding-top: 5%;
+    padding-top: 3%;
     padding-right: 0;
+    padding-bottom: 3%;
     padding-left: 0;
-    background-color: lightgray;
-    border-top: 1px solid green;
+    margin-bottom: 0;
+    background-color: $azul-original;
     > li {
       display: inline-block;
       width: 25%;

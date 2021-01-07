@@ -14,3 +14,18 @@ $color-input-border: lighten($color-heading-text, 50%);
 $color-button-bg: $color-link-text;
 $color-button-disabled-bg: darken(desaturate($color-button-bg, 20%), 10%);
 $color-button-text: white;
+
+// Main Colors
+$azul-oscuro: #00256a;
+$azul-original: #0c4c99;
+$azul-claro: #5177ca;
+$rosado-oscuro: #b63a54;
+$rosado-original: #ec6b80;
+$rosado-claro: #ff9caf;
+$verde-oscuro: #006b67;
+$verde-original: #289a95;
+$verde-claro: #63cbc5;
+$naranjo-oscuro: #b84e40;
+$naranjo-original: #ef7d6b;
+$naranjo-claro: #ffae99;
+$gris: #ccc;
