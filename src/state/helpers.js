@@ -6,5 +6,15 @@ export const authComputed = {
   }),
   ...mapGetters('auth', ['loggedIn']),
 }
+export const WorkshopsComputed = {
+  ...mapState('workshops', {
+    workshops: (state) => state.workshops,
+  }),
+}
+export const TeachersComputed = {
+  ...mapState('teachers', {
+    teachers: (state) => state.teachers,
+  }),
+}
 
 export const authMethods = mapActions('auth', ['logIn', 'logOut'])

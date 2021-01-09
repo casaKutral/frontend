@@ -19,3 +19,26 @@ $content-font-weight: 400;
   font-weight: $content-font-weight;
   color: $color-text;
 }
+
+@mixin title {
+  font-family: 'Averta';
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 800;
+  color: $rosado-original;
+}
+
+@mixin prices {
+  font-family: 'Chilena-Bold';
+  font-size: 18px;
+  font-weight: bold;
+  color: $verde-original;
+}
+
+@mixin normalText {
+  font-family: 'Chilena-Regular';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  color: $azul-oscuro;
+}

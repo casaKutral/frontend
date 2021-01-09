@@ -12,6 +12,10 @@ export default {
       type: Array,
       required: true,
     },
+    currentRoute: {
+      type: String,
+      default: '',
+    },
   },
   // Render functions are an alternative to templates
   render(h, { props, $style = {} }) {
@@ -19,6 +23,36 @@ export default {
       return typeof route.title === 'function' ? route.title() : route.title
     }
 
+    function getIcon(route) {
+      const current = props.currentRoute
+      const routeName = route.title
+      switch (current) {
+        case '/reservas':
+          if (routeName === 'Reservar') {
+            return require(`../assets/images/${route.icon}_active.png`)
+          } else {
+            return require(`../assets/images/${route.icon}.png`)
+          }
+        case '/productos':
+          if (routeName === 'Cocina') {
+            return require(`../assets/images/${route.icon}_active.png`)
+          } else {
+            return require(`../assets/images/${route.icon}.png`)
+          }
+        case '/blog':
+          if (routeName === 'Blog') {
+            return require(`../assets/images/${route.icon}_active.png`)
+          } else {
+            return require(`../assets/images/${route.icon}.png`)
+          }
+        case '/':
+          if (routeName === 'Inicio') {
+            return require(`../assets/images/${route.icon}_active.png`)
+          } else {
+            return require(`../assets/images/${route.icon}.png`)
+          }
+      }
+    }
     // Functional components are the only components allowed
     // to return an array of children, rather than a single
     // root node.
@@ -29,11 +63,15 @@ export default {
         to={route}
         exact-active-class={$style.active}
       >
-        <a>
-          <img
-            src={require(`../assets/images/${route.icon}.png`)}
-            alt='icono'
-          />
+        <a class={route.icon ? $style.bottomNavA : ''}>
+          {route.icon && (
+            <img
+              src={getIcon(route)}
+              alt='icono'
+              class={$style.icon}
+              exact-active-class={$style.iconActive}
+            />
+          )}
           {getRouteTitle(route)}
         </a>
       </BaseLink>
@@ -45,9 +83,22 @@ export default {
 <style lang="scss" module>
 @import '@design';
 
+.bottomNavA {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+}
+
+.icon {
+  width: 35%;
+}
+
 .active a {
   font-weight: 600;
-  color: $color-link-text-active;
+  color: white !important;
   text-decoration: none;
   cursor: default;
 }

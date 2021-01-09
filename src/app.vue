@@ -54,10 +54,9 @@ body {
 // Base element styles
 // ===
 
-a,
-a:visited {
-  color: $color-link-text;
-}
+// a:visited {
+//   color: $color-link-text;
+// }
 
 h1 {
   @extend %typography-xxlarge;
@@ -78,6 +77,57 @@ h4 {
 h5,
 h6 {
   @extend %typography-small;
+}
+
+@font-face {
+  font-family: 'Averta';
+  src: local('Averta'),
+    url(./assets/fonts/AvertaDemoPE-ExtraBold.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Chilena-Bold';
+  src: local('Chilena-Bold'),
+    url(./assets/fonts/Chilena-Bold.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Chilena-ExtraBold';
+  src: local('Chilena-ExtraBold'),
+    url(./assets/fonts/Chilena-ExtraBold.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Chilena-Light';
+  src: local('Chilena-Light'),
+    url(./assets/fonts/Chilena-Light.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Chilena-Regular';
+  src: local('Chilena-Regular'),
+    url(./assets/fonts/Chilena-Regular.otf) format('truetype');
+}
+@font-face {
+  font-family: 'ChilenaItalic-Bold';
+  src: local('ChilenaItalic-Bold'),
+    url(./assets/fonts/ChilenaItalic-Bold.otf) format('truetype');
+}
+@font-face {
+  font-family: 'ChilenaItalic-ExtraBold';
+  src: local('ChilenaItalic-ExtraBold'),
+    url(./assets/fonts/ChilenaItalic-ExtraBold.otf) format('truetype');
+}
+@font-face {
+  font-family: 'ChilenaItalic-Light';
+  src: local('ChilenaItalic-Light'),
+    url(./assets/fonts/ChilenaItalic-Light.otf) format('truetype');
+}
+@font-face {
+  font-family: 'ChilenaItalic-Regular';
+  src: local('ChilenaItalic-Regular'),
+    url(./assets/fonts/ChilenaItalic-Regular.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Industry';
+  src: local('Industry'),
+    url(./assets/fonts/Industry.Inc.Base.otf) format('truetype');
 }
 
 // ===
