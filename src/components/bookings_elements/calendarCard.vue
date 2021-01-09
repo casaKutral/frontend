@@ -1,9 +1,6 @@
 <script>
 import moment from 'moment'
-// import HourCard from '@src/components/bookings_elements/hourCard.vue'
-
 export default {
-  // components: { HourCard },
   props: {
     workshop: {
       type: Object,
@@ -42,10 +39,6 @@ export default {
         default() {
           return []
         },
-      },
-      hoursAvailable: {
-        type: Array,
-        default: null,
       },
       disabledDates2: (date) => {
         const momentDate = moment(date).format('L')
@@ -117,18 +110,17 @@ export default {
       }
     },
     pickDate(date) {
-      debugger
-      console.log('ej 1')
-      // if (date) {
-      //   this.pickedDate = moment(date).format('L')
-      // const posibleHour = this.hours.filter((hour) => {
-      //   if (hour.date === this.pickedDate) {
-      //     return hour
-      //   }
-      // })
-      // this.showHourPicker = true
-      // this.hoursAvailable = posibleHour
-      // }
+      if (date) {
+        this.pickedDate = moment(date).format('L')
+        const posibleHour = this.hours.filter((hour) => {
+          if (hour.date === this.pickedDate) {
+            return hour
+          }
+        })
+        posibleHour.map((hour) => {
+          // console.log(hour.hour)
+        })
+      }
     },
     retrieveBooking() {
       this.booking = {
@@ -136,11 +128,6 @@ export default {
         hour: this.pickedHour,
       }
       this.$emit.saveBooking(this.booking)
-    },
-  },
-  watchers: {
-    pickedDate() {
-      console.log(this.pickedDate)
     },
   },
 }
@@ -155,9 +142,6 @@ export default {
         :md-closed="pickDate(pickedDate)"
       />
     </div>
-    <!-- :md-closed="pickDate(pickedDate)" -->
-    <!--  -->
-    <!-- <HourCard :card-hidden="showHourPicker" :elements="hoursAvailable" /> -->
   </div>
 </template>
 
