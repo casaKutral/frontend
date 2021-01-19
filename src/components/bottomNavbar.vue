@@ -57,6 +57,7 @@ export default {
   .bottomNav {
     position: absolute;
     bottom: 0;
+    z-index: 3;
     display: flex;
     align-items: flex-end;
     width: 100%;

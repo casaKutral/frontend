@@ -144,6 +144,7 @@ export default {
       <WorkshopBooking
         :workshop="workshop"
         :hours="workshopsHours"
+        :teacher="teacherData"
         @back="backFromConfirm"
       />
     </div>

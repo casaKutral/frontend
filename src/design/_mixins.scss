@@ -34,3 +34,30 @@
   border: none;
   border-radius: 6px;
 }
+
+@mixin secondary-button {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Averta';
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 20px;
+  color: $azul-claro;
+  text-align: center;
+  background-color: white;
+  border: none;
+}
+@mixin terciary-button {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Averta';
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 20px;
+  color: $rosado-oscuro;
+  text-align: center;
+  background-color: white;
+  border: none;
+}

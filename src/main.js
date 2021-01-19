@@ -8,17 +8,24 @@ import {
   MdCard,
   MdDialog,
   MdDatepicker,
+  MdCheckbox,
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons'
+import {
+  faArrowAltCircleLeft,
+  faClock,
+} from '@fortawesome/free-regular-svg-icons'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import App from './app.vue'
 // Globally register all `_base`-prefixed components
 import '@components/_globals'
 
 library.add(faArrowAltCircleLeft)
+library.add(faClock)
+library.add(faPlusCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
@@ -67,6 +74,7 @@ Vue.use(MdTabs)
 Vue.use(MdCard)
 Vue.use(MdDialog)
 Vue.use(MdDatepicker)
+Vue.use(MdCheckbox)
 
 Vue.material.locale.dateFormat = 'dd/MM/yyyy'
 Vue.material.locale.days = [
