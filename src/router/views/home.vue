@@ -17,3 +17,7 @@ export default {
     <img src="@assets/images/logo.png" alt="Logo" />
   </Layout>
 </template>
+
+<style lang="scss">
+@import '@design';
+</style>
