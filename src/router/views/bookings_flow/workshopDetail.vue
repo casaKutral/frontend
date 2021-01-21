@@ -1,6 +1,5 @@
 <script>
 import store from '@state/store'
-import axios from 'axios'
 import WorkshopBooking from './workshopBooking.vue'
 
 export default {
@@ -33,7 +32,6 @@ export default {
         type: Object,
         default: null,
       },
-      api: 'https://backend.casakutral.vercel.app/api/dates',
       allHours: [],
       workshopsHours: [],
     }
@@ -61,15 +59,10 @@ export default {
       this.showDetail = true
     },
     fetchFirst: function() {
-      axios
-        .get(this.api)
-        .then((response) => {
-          this.allHours = response.data
-          this.filterDates()
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      store.dispatch('workshops/fetchHours').then((data) => {
+        this.allHours = data
+        this.filterDates()
+      })
     },
     filterDates() {
       this.workshopsHours = this.allHours.filter((hour) => {

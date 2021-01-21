@@ -140,6 +140,7 @@ export default {
       :workshop-name="workshop.name"
       :teacher-name="teacher.name"
       :total-value="totalValue"
+      :workshop-id="workshop._id"
       @close-modal="showCard(false)"
     />
     <!-- <button @click="backToHome('endbooking')">volver al home</button> -->

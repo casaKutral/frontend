@@ -1,4 +1,6 @@
 <script>
+import store from '@state/store'
+
 export default {
   props: {
     cardHidden: {
@@ -7,6 +9,10 @@ export default {
     value: {
       type: Array,
       default: null,
+    },
+    workshopId: {
+      type: String,
+      default: '',
     },
     workshopName: {
       type: String,
@@ -24,14 +30,124 @@ export default {
   data() {
     return {
       acceptTerms: false,
+      showConfirmData: true,
+      showTermsDetail: false,
+      showUserDataForm: false,
+      validForm: false,
+      showSuccess: false,
+      rememberMe: false,
+      name: '',
+      email: '',
+      phone: '',
+      savedUser: {},
     }
   },
   created() {
-    console.log(this.value)
+    const savedUser = JSON.parse(localStorage.getItem('user'))
+    if (savedUser) {
+      this.name = savedUser.name
+      this.email = savedUser.email
+      this.phone = savedUser.phone
+      this.rememberMe = true
+      this.validForm = true
+    }
   },
   methods: {
     closeModal: function() {
       this.$emit('close-modal')
+    },
+    confirm() {
+      if (this.acceptTerms === true) {
+        this.showConfirmData = false
+        this.showUserDataForm = true
+        setTimeout(() => {
+          const nameInput = document.getElementById('userFormName')
+          const emailInput = document.getElementById('userFormEmail')
+          const phoneInput = document.getElementById('userFormPhone')
+          phoneInput.addEventListener('keyup', () => {
+            if (
+              nameInput.value !== '' &&
+              emailInput.value !== '' &&
+              phoneInput.value !== ''
+            ) {
+              this.validForm = true
+            }
+          })
+        }, 2000)
+      }
+    },
+    backFromUserForm() {
+      this.showConfirmData = true
+      this.showUserDataForm = false
+    },
+    showTerms() {
+      this.showConfirmData = false
+      this.showTermsDetail = true
+    },
+    backFromTerms() {
+      this.showConfirmData = true
+      this.showTermsDetail = false
+    },
+    starBookingProcess() {
+      if (this.validForm === true) {
+        const newUser = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          // workshopsBooked_ids: Array
+        }
+        const booking = {
+          dates: this.value,
+          cost: this.totalValue,
+          status: 'pending',
+          workshop_id: this.workshopId,
+          user_id: '',
+          user_email: this.email,
+          user_phone: this.phone,
+        }
+        if (this.rememberMe === true) {
+          this.getUsers(booking, newUser)
+        } else {
+          // this.sendBooking(booking)
+        }
+      }
+    },
+    getUsers(booking, newUser) {
+      store.dispatch('users/fetchUsers')
+      this.savedUser = store.state.users.user
+      if (this.savedUser.name !== undefined) {
+        booking.user_id = this.savedUser._id
+        debugger
+        this.sendBooking(booking, 'updateUser', newUser)
+      } else {
+        localStorage.setItem('user', JSON.stringify(newUser))
+        this.sendBooking(booking, 'addUser', newUser)
+      }
+    },
+    sendBooking(booking, action, newUser) {
+      store.dispatch('workshops/postBooking', booking).then((response) => {
+        if (response.status >= 200 && response.status <= 300) {
+          this.showSuccess = true
+          this.showUserDataForm = false
+          debugger
+          if (action === 'updateUser') {
+            const bookingId = [
+              ...this.savedUser.workshopsBooked_ids,
+              response.data._id,
+            ]
+            store.dispatch('users/updateUser', bookingId)
+          } else if (action === 'addUser') {
+            newUser.workshopsBooked_ids = [response.data._id]
+            store.dispatch('users/createUser', newUser)
+          }
+          // store.dispatch('workshops/updateHours', booking)
+        }
+      })
+    },
+    backToHome() {
+      this.$emit('close-modal')
+      this.$router.push({ path: '/' })
+      // navegar al home
     },
   },
 }
@@ -44,37 +160,154 @@ export default {
       :md-active="cardHidden === true"
       :md-fullscreen="false"
     >
-      <md-dialog-title class="pink modal-title"
-        >Revisemos que esté todo correcto</md-dialog-title
-      >
-      <div class="cc-body">
-        <div class="col-4">
-          <label class="infoLabel">Taller</label>
-          <label class="infoLabel">Profesor</label>
-          <label class="infoLabel">Fecha</label>
-          <label class="infoLabel">Precio</label>
-        </div>
-        <div class="col-6">
-          <label class="infoData">{{ workshopName }}</label>
-          <label class="infoData">{{ teacherName }}</label>
-          <label class="infoData"
-            >{{ value[0].date }} - {{ value[0].hour }}</label
-          >
-          <label class="infoData">CLP ${{ totalValue }}</label>
-        </div>
-      </div>
-      <div class="check-row">
-        <md-checkbox v-model="acceptTerms" class="md-primary"
-          >Acepto los
-          <a>términos y condiciones</a>
-        </md-checkbox>
-      </div>
-      <md-dialog-actions>
-        <md-button class="primary" @click="closeModal">Todo en orden</md-button>
-        <md-button class="btn-cancel" @click="closeModal"
-          >Quiero modificar</md-button
+      <div v-if="showConfirmData === true" style="display: contents;">
+        <md-dialog-title class="pink modal-title"
+          >Revisemos que esté todo correcto</md-dialog-title
         >
-      </md-dialog-actions>
+        <div class="cc-body">
+          <div class="col-4">
+            <label class="infoLabel">Taller</label>
+            <label class="infoLabel">Profesor</label>
+            <label class="infoLabel">Fecha</label>
+            <label class="infoLabel">Precio</label>
+          </div>
+          <div class="col-6">
+            <label class="infoData">{{ workshopName }}</label>
+            <label class="infoData">{{ teacherName }}</label>
+            <label class="infoData"
+              >{{ value[0].date }} - {{ value[0].hour }}</label
+            >
+            <label class="infoData">CLP ${{ totalValue }}</label>
+          </div>
+        </div>
+        <div class="check-row">
+          <md-checkbox v-model="acceptTerms" class="md-primary"
+            >Acepto los
+            <a @click="showTerms">términos y condiciones</a>
+          </md-checkbox>
+        </div>
+        <md-dialog-actions>
+          <md-button
+            :class="
+              acceptTerms === true ? 'primary' : 'primary primary-disabled'
+            "
+            @click="confirm"
+            >Todo en orden</md-button
+          >
+          <md-button class="btn-cancel" @click="closeModal"
+            >Quiero modificar</md-button
+          >
+        </md-dialog-actions>
+      </div>
+      <div
+        v-if="showTermsDetail === true"
+        id="terms"
+        style="display: contents;"
+      >
+        <md-dialog-title class="pink modal-title">
+          <font-awesome-icon
+            class="chevron-left"
+            :icon="['fa', 'chevron-left']"
+            @click="backFromTerms"
+          />
+          Términos y condiciones
+        </md-dialog-title>
+        <div class="cc-body">
+          <p class="terms-text">
+            <span class="bold">Realizar pago</span><br /><br />
+            La reserva se considera completa al momento que la persona que la
+            solicita haga el pago mediante transferencia a la cuenta enviada a
+            su correo electrónico. Al momento de realizar esta transferencia
+            debe especficar en el Asunto de la misma el
+            <span class="bold">código de reserva</span> que será enviado a su
+            correo electrónico.<br />Tiene un plazo de 24 horas, a contar de que
+            se envía el mail, para hacer dicho pago o su solicitud de reserva
+            será anulado y esta podría ser tomada por otra persona.<br /><br /><br />
+            <span class="bold">Reserva Intransferible</span>
+            La reserva es intransferible y solo podrá ser ocupada el día y la
+            hora solicirada, y por la persona que figura en la información
+            entregada al momento de realizar la solicitud y posterior pago.<br /><br /><br />
+            <span class="bold">Opciones de cancelación de Reserva</span>
+            Para dejar anulada la reserva puede no realizar el pago de esta y
+            luego de 24 horas está volverá a estar disponible y no deberá pagar
+            nada. Si usted ya realizó el pago y desea cancelar la reserva, debe
+            solicitarla mediante un correo electrónico a
+            <span class="bold">reservas@casakutral.cl</span> y en el asunto de
+            este correo escribir “CANCELAR RESERVA”, además en la información
+            del correo debe entregar el código de reserva que le habrá llegado a
+            la bandeja de entrada de su correo electrónico.<br /><br /><br />
+            Esta solicitud debe realizarse con un mínimo de
+            <span class="bold">48 horas</span> antes del inicio de la actividad,
+            de lo contrario no podrá ser cancelada la reserva ni devuelto el
+            dinero. Cancelar una reserva que ha sido pagada tiene un costo de
+            CL$500 que se descontarán al momento de la devolución del dinero.
+          </p>
+        </div>
+      </div>
+      <div
+        v-if="showUserDataForm === true"
+        id="userForm"
+        style="display: contents;"
+      >
+        <md-dialog-title class="pink modal-title">
+          <font-awesome-icon
+            class="chevron-left"
+            :icon="['fa', 'chevron-left']"
+            @click="backFromUserForm"
+          />
+        </md-dialog-title>
+        <div class="cc-body">
+          <label class="infoLabel">Nombre y Apellido</label>
+          <BaseInputText
+            id="userFormName"
+            v-model="name"
+            name="name"
+            type="text"
+            placeholder="Lupita de las nieves"
+          />
+          <label class="infoLabel">Correo electrónico</label>
+          <BaseInputText
+            id="userFormEmail"
+            v-model="email"
+            name="email"
+            type="text"
+            placeholder="lupi.nevada@gmail.com"
+          />
+          <label class="infoLabel">Teléfono de contacto</label>
+          <BaseInputText
+            id="userFormPhone"
+            v-model="phone"
+            name="phone"
+            type="text"
+            placeholder="+56948628199"
+          />
+        </div>
+        <div class="check-row">
+          <md-checkbox v-model="rememberMe" class="md-primary"
+            >Recuerda mis datos para la próxima vez
+          </md-checkbox>
+        </div>
+        <md-dialog-actions>
+          <md-button
+            :class="validForm === true ? 'primary' : 'primary primary-disabled'"
+            @click="starBookingProcess"
+            >Reservar</md-button
+          >
+        </md-dialog-actions>
+      </div>
+      <div v-if="showSuccess === true" style="display: contents;">
+        <md-dialog-title class="pink modal-title"
+          >Reserva exitosa!</md-dialog-title
+        >
+        <div class="cc-body">
+          <p>Éxito</p>
+        </div>
+        <md-dialog-actions>
+          <md-button class="btn-cancel" @click="backToHome"
+            >Volver al inicio</md-button
+          >
+        </md-dialog-actions>
+      </div>
     </md-dialog>
   </div>
 </template>
@@ -140,6 +373,9 @@ export default {
     margin-bottom: 10%;
     margin-left: 0;
   }
+  .primary-disabled {
+    background-color: $gris;
+  }
   .primary {
     color: white !important;
     text-transform: none;
@@ -160,7 +396,59 @@ export default {
       color: $azul-claro;
     }
   }
-
+  #terms {
+    .modal-title {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: auto;
+      margin-top: 5%;
+      margin-bottom: 2%;
+    }
+    .terms-text {
+      max-height: 350px;
+      padding: 5%;
+      overflow-y: scroll;
+      font-family: 'Chilena-Regular';
+      font-size: 18px;
+      font-style: normal;
+      .bold {
+        font-weight: bold;
+      }
+    }
+  }
+  .chevron-left {
+    position: relative;
+    left: -11%;
+  }
+  #userForm {
+    .modal-title {
+      display: flex;
+      justify-content: flex-start;
+      width: 85%;
+      margin: auto;
+      margin-top: 0%;
+      margin-bottom: 0%;
+    }
+    .cc-body {
+      justify-content: flex-start;
+      width: 100%;
+      padding-right: 8%;
+      padding-left: 10%;
+    }
+    .infoLabel {
+      padding-bottom: 5%;
+      padding-left: 0%;
+    }
+    .check-row {
+      padding-left: 5%;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .md-dialog-actions {
+      margin-bottom: 10%;
+    }
+  }
   .btn-cancel {
     @include terciary-button;
 
