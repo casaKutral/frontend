@@ -62,32 +62,39 @@ export const actions = {
       })
   },
   updateHours({ commit, state }, payload) {
-    const findHours = payload.map((booking) => {
-      const matchHours = state.hours.fillter((hour) => {
-        if (hour.date === booking.date && hour.hour === booking.hour) {
+    const findHours = payload.dates?.map((booking) => {
+      const matchHours = state.hours.find((hour) => {
+        if (hour.date._id === booking.date.id) {
           return hour
         }
       })
       return matchHours
     })
     findHours.map((hour) => {
-      if (hour.capacity === 1) {
-        return axios
-          .delete(`https://backend.casakutral.vercel.app/api/dates/${hour._id}`)
-          .then((response) => {
-            console.log(response)
-          })
+      let newCapacity
+      if (
+        hour?.booked?.available === 1 ||
+        hour?.booked?.available === hour?.booked?.pending - 1
+      ) {
+        newCapacity = {
+          pending: hour.booked.pending + 1,
+          confirmed: hour.booked.confirmed,
+          available: 0,
+        }
       } else {
-        const newCapacity = hour.capacity - 1
-        return axios
-          .pacth(
-            `https://backend.casakutral.vercel.app/api/dates/${hour._id}`,
-            { capacity: newCapacity }
-          )
-          .then((response) => {
-            console.log(response)
-          })
+        newCapacity = {
+          pending: hour.booked.pending + 1,
+          confirmed: hour.booked.confirmed,
+          available: hour.booked.available - 1,
+        }
       }
+      return axios
+        .patch(`https://backend.casakutral.vercel.app/api/dates/${hour._id}`, {
+          booked: newCapacity,
+        })
+        .then((response) => {
+          console.log(response)
+        })
     })
   },
 }

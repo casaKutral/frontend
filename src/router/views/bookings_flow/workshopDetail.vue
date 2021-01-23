@@ -66,7 +66,10 @@ export default {
     },
     filterDates() {
       this.workshopsHours = this.allHours.filter((hour) => {
-        if (hour.workshop_id === this.workshop._id) {
+        if (
+          hour.workshop_id === this.workshop._id &&
+          hour.booked?.available > 0
+        ) {
           return hour
         }
       })

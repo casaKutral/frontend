@@ -57,12 +57,12 @@ export const actions = {
       })
   },
   updateUser({ commit, state }, payload) {
-    console.log(payload)
-    debugger
     return axios
       .patch(
         `https://backend.casakutral.vercel.app/api/users/${state.user._id}`,
-        { workshopsBooked_ids: payload }
+        {
+          bookings_ids: payload,
+        }
       )
       .then((response) => {
         console.log(response)

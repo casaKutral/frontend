@@ -113,31 +113,31 @@ export default {
       }
     },
     getUsers(booking, newUser) {
-      store.dispatch('users/fetchUsers')
-      this.savedUser = store.state.users.user
-      if (this.savedUser.name !== undefined) {
-        booking.user_id = this.savedUser._id
-        debugger
-        this.sendBooking(booking, 'updateUser', newUser)
-      } else {
-        localStorage.setItem('user', JSON.stringify(newUser))
-        this.sendBooking(booking, 'addUser', newUser)
-      }
+      store.dispatch('users/fetchUsers').then((response) => {
+        this.savedUser = store.state.users.user
+        if (this.savedUser?.name !== undefined) {
+          booking.user_id = this.savedUser._id
+          this.sendBooking(booking, 'updateUser', newUser)
+        } else {
+          localStorage.setItem('user', JSON.stringify(newUser))
+          this.sendBooking(booking, 'addUser', newUser)
+        }
+      })
     },
     sendBooking(booking, action, newUser) {
       store.dispatch('workshops/postBooking', booking).then((response) => {
         if (response.status >= 200 && response.status <= 300) {
           this.showSuccess = true
           this.showUserDataForm = false
-          debugger
+          store.dispatch('workshops/updateHours', booking)
           if (action === 'updateUser') {
             const bookingId = [
-              ...this.savedUser.workshopsBooked_ids,
+              ...this.savedUser.bookings_ids,
               response.data._id,
             ]
             store.dispatch('users/updateUser', bookingId)
           } else if (action === 'addUser') {
-            newUser.workshopsBooked_ids = [response.data._id]
+            newUser.bookings_ids = [response.data._id]
             store.dispatch('users/createUser', newUser)
           }
           // store.dispatch('workshops/updateHours', booking)
@@ -165,18 +165,24 @@ export default {
           >Revisemos que esté todo correcto</md-dialog-title
         >
         <div class="cc-body">
-          <div class="col-4">
+          <div class="row">
             <label class="infoLabel">Taller</label>
-            <label class="infoLabel">Profesor</label>
-            <label class="infoLabel">Fecha</label>
-            <label class="infoLabel">Precio</label>
-          </div>
-          <div class="col-6">
             <label class="infoData">{{ workshopName }}</label>
+          </div>
+          <div class="row">
+            <label class="infoLabel">Profesor</label>
             <label class="infoData">{{ teacherName }}</label>
-            <label class="infoData"
-              >{{ value[0].date }} - {{ value[0].hour }}</label
-            >
+          </div>
+          <div class="row">
+            <label class="infoLabel">Fecha</label>
+            <div class="datesBlock">
+              <label v-for="date in value" :key="date._id" class="infoData"
+                >{{ date.date }} - {{ date.hour }}</label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <label class="infoLabel">Precio</label>
             <label class="infoData">CLP ${{ totalValue }}</label>
           </div>
         </div>
@@ -340,9 +346,10 @@ export default {
     width: 60%;
   }
   .infoLabel {
-    display: block;
-    padding-bottom: 11%;
-    padding-left: 30%;
+    display: inline-flex;
+    width: 35%;
+    padding-bottom: 5%;
+    padding-left: 15%;
     font-family: 'Averta';
     font-size: 18px;
     font-style: italic;
@@ -351,15 +358,20 @@ export default {
     text-align: left;
   }
   .infoData {
-    display: block;
+    display: inline-flex;
     padding-right: 25%;
-    padding-bottom: 8%;
-    font-family: 'Averta';
+    padding-bottom: 5%;
+    font-family: 'Chilena-regular';
     font-size: 20px;
-    font-style: italic;
-    font-weight: 800;
+    font-weight: 400;
     color: $azul-original;
     text-align: left;
+  }
+  .datesBlock {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 65%;
+    margin-bottom: 5%;
   }
   .md-dialog-container {
     max-width: 768px;
