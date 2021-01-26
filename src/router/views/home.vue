@@ -128,17 +128,15 @@ export default {
               <img src="https://via.placeholder.com/570x160" />
               <p class="italicText">
                 <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                 industry's standard Lorem Ipsum
-                is simply dummy text of the printing typesettinpmg industry.
-                Lorem Ipsum has been the.
+                industry's standard Lorem Ipsum is simply dummy text of the
+                printing typesettinpmg industry. Lorem Ipsum has been the.
               </p>
             </div>
             <div class="card">
               <p class="italicText">
                 <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                 industry's standard Lorem Ipsum
-                is simply dummy text of the printing typesettinpmg industry.
-                Lorem Ipsum has been the.
+                industry's standard Lorem Ipsum is simply dummy text of the
+                printing typesettinpmg industry. Lorem Ipsum has been the.
               </p>
               <img src="https://via.placeholder.com/570x160" />
             </div>
@@ -146,9 +144,8 @@ export default {
               <img src="https://via.placeholder.com/570x160" />
               <p class="italicText">
                 <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                 industry's standard Lorem Ipsum
-                is simply dummy text of the printing typesettinpmg industry.
-                Lorem Ipsum has been the.
+                industry's standard Lorem Ipsum is simply dummy text of the
+                printing typesettinpmg industry. Lorem Ipsum has been the.
               </p>
             </div>
           </div>
@@ -156,6 +153,56 @@ export default {
       </div>
       <div class="bloqueInfo sectionBannerSeparador">
         <img class="banner" src="https://via.placeholder.com/1440x200" />
+      </div>
+      <div class="bloqueInfo sectionGustos">
+        <div class="container">
+          <div class="titleWrapper">
+            <h1 class="title">Date un gustito</h1>
+          </div>
+          <div class="cardContainer">
+            <div class="card">
+              <img
+                src="https://via.placeholder.com/330x295"
+                alt="loren ipsum"
+              />
+              <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
+              <p class="normalText"
+                >Text of the printing typesettinpmg industry lorem Ipsum has
+                beenhho.</p
+              >
+            </div>
+            <div class="card">
+              <img
+                src="https://via.placeholder.com/330x295"
+                alt="loren ipsum"
+              />
+              <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
+              <p class="normalText"
+                >Text of the printing typesettinpmg industry lorem Ipsum has
+                beenhho.</p
+              >
+            </div>
+            <div class="card">
+              <img
+                src="https://via.placeholder.com/330x295"
+                alt="loren ipsum"
+              />
+              <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
+              <p class="normalText"
+                >Text of the printing typesettinpmg industry lorem Ipsum has
+                beenhho.</p
+              >
+            </div>
+          </div>
+          <div class="titleWrapper">
+            <button class="primary">
+              Ir a la Cocina
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bloqueInfo sectionMapa">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.6204938330316!2d-71.49539088486375!3d-32.72271078098849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689bf3b3cf3349f%3A0xc6af07c2b30e3de5!2sAv%20Central%2C%20Puchuncavi%2C%20Puchuncav%C3%AD%2C%20Valpara%C3%ADso!5e0!3m2!1ses!2scl!4v1611623559624!5m2!1ses!2scl" width="1440" height="360" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>  
       </div>
     </div>
   </Layout>
@@ -250,22 +297,51 @@ export default {
       }
       .container {
         width: 80%;
-        .cardContainer{
-        padding-bottom:8%;
-        .card{
-          display:inline-flex;
-          justify-content: space-between;
-          margin-top: 4%;
-          p{
-            line-height: 28.8px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            margin-left:5%;
-          }
+        .cardContainer {
+          padding-bottom: 8%;
+          .card {
+            display: inline-flex;
+            justify-content: space-between;
+            margin-top: 4%;
+            p {
+              line-height: 28.8px;
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              margin-left: 5%;
+            }
           }
         }
       }
+    }
+    &.sectionGustos {
+      .container {
+        display: block;
+        width: 80%;
+        .cardContainer {
+          display: flex;
+          justify-content: space-between;
+          .card {
+            width: 28%;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            img {
+              margin-bottom: 15px;
+            }
+            p {
+              text-align: center;
+              margin: 10px;
+              color: 000000;
+            }
+          }
+        }
+      }
+    }
+    &.sectionMapa{
+    iframe{
+      width: 100%;
+    }
     }
   }
 }
@@ -281,5 +357,10 @@ export default {
 }
 .italicText {
   @include italicText;
+}
+.primary{
+  @include main-button;
+  background-color: $verde-original;
+  margin: 5% 0;
 }
 </style>
