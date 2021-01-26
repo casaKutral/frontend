@@ -1,9 +1,10 @@
 <script>
 import NavBar from '@components/nav-bar.vue'
 import BottomNavbar from '@components/bottomNavbar.vue'
+import Footer from '@components/footer.vue'
 
 export default {
-  components: { NavBar, BottomNavbar },
+  components: { NavBar, BottomNavbar, Footer },
 }
 </script>
 
@@ -12,6 +13,7 @@ export default {
     <NavBar />
     <BottomNavbar />
     <slot />
+    <Footer />
   </div>
 </template>
 

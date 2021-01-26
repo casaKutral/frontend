@@ -341,6 +341,7 @@ export default {
     &.sectionMapa{
     iframe{
       width: 100%;
+      height: 360px;
     }
     }
   }
