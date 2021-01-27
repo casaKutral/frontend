@@ -52,13 +52,15 @@ export default {
         const splitToday = todayDate.split('/').map((el) => {
           return Number(el)
         })
-        if (splitToday[1] >= split[1]) {
-          return true
-        }
         // block days without hours
         let dateWithFormat = ''
         if (split[0] < 10) {
           dateWithFormat = [split[1], `0${split[0]}`, split[2]].join('/')
+          if (split[1] < 10) {
+            dateWithFormat = [`0${split[1]}`, `0${split[0]}`, split[2]].join(
+              '/'
+            )
+          }
         } else {
           dateWithFormat = [split[1], split[0], split[2]].join('/')
         }
@@ -67,10 +69,20 @@ export default {
             return hour
           }
         })
-        // console.log(dateWithFormat, this.hours)
+        // console.log(dateWithFormat)
         if (posibleHour.length === 0) {
           return true
         }
+        // debugger
+        // block past days but not to the next month
+        if (split[0] > splitToday[0]) {
+        } else {
+          if (splitToday[1] >= split[1]) {
+            console.log(posibleHour)
+            return true
+          }
+        }
+
         // block disables days
         const day = date.getDay()
         const index = this.disabled.indexOf(day)
@@ -91,8 +103,8 @@ export default {
       const allDays = this.$material.locale.days
       // const disabledArray = []
       if (this.workshop !== null) {
-        const workshopDays = this.workshop.capacity.map((day) => {
-          return day.date
+        const workshopDays = this.workshop.days.map((day) => {
+          return day
         })
         const disabledDays = allDays.filter((day) => {
           const index = workshopDays.indexOf(day)

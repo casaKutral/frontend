@@ -118,7 +118,7 @@ p {
 .workshopImgCol {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 48%;
 }
 .workshopImg {
   @include card-shadow;
@@ -135,7 +135,7 @@ p {
 .w-cost {
   @include prices;
 
-  margin-bottom: 5%;
+  // margin-bottom: 5%;
 }
 
 .workshopInfoWrapper {

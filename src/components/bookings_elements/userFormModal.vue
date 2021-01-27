@@ -33,9 +33,13 @@ export default {
       showConfirmData: true,
       showTermsDetail: false,
       showUserDataForm: false,
+      showMailWarning: false,
       validForm: false,
       showSuccess: false,
+      showError: false,
       rememberMe: false,
+      showMailConfirm: false,
+      failCode: '',
       name: '',
       email: '',
       phone: '',
@@ -67,13 +71,37 @@ export default {
           phoneInput.addEventListener('keyup', () => {
             if (
               nameInput.value !== '' &&
-              emailInput.value !== '' &&
-              phoneInput.value !== ''
+              phoneInput.value !== '' &&
+              this.ValidateEmail(emailInput.value) === true
+            ) {
+              this.validForm = true
+            } else if (this.ValidateEmail(emailInput.value) === false) {
+              this.showMailWarning = true
+              this.validForm = false
+              emailInput.addEventListener('keyup', () => {
+                if (this.ValidateEmail(emailInput.value) === true) {
+                  this.showMailWarning = false
+                }
+              })
+            } else {
+              this.validForm = false
+            }
+            if (
+              phoneInput.value !== '' &&
+              this.ValidateEmail(emailInput.value) === true
             ) {
               this.validForm = true
             }
           })
         }, 2000)
+      }
+    },
+    ValidateEmail(inputText) {
+      var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      if (inputText.match(mailformat)) {
+        return true
+      } else {
+        return false
       }
     },
     backFromUserForm() {
@@ -87,6 +115,14 @@ export default {
     backFromTerms() {
       this.showConfirmData = true
       this.showTermsDetail = false
+    },
+    goToConfirmMail() {
+      this.showUserDataForm = false
+      this.showMailConfirm = true
+    },
+    backFromConfirmMail() {
+      this.showUserDataForm = true
+      this.showMailConfirm = false
     },
     starBookingProcess() {
       if (this.validForm === true) {
@@ -102,13 +138,14 @@ export default {
           status: 'pending',
           workshop_id: this.workshopId,
           user_id: '',
+          user_name: this.name,
           user_email: this.email,
           user_phone: this.phone,
         }
         if (this.rememberMe === true) {
           this.getUsers(booking, newUser)
         } else {
-          // this.sendBooking(booking)
+          this.sendBooking(booking, 'noAddUser', newUser)
         }
       }
     },
@@ -126,6 +163,7 @@ export default {
     },
     sendBooking(booking, action, newUser) {
       store.dispatch('workshops/postBooking', booking).then((response) => {
+        this.showMailConfirm = false
         if (response.status >= 200 && response.status <= 300) {
           this.showSuccess = true
           this.showUserDataForm = false
@@ -139,8 +177,13 @@ export default {
           } else if (action === 'addUser') {
             newUser.bookings_ids = [response.data._id]
             store.dispatch('users/createUser', newUser)
+          } else if (action === 'noAddUser') {
+            // no hacer nada con el usuario
           }
           // store.dispatch('workshops/updateHours', booking)
+        } else {
+          this.showError = true
+          this.failCode = response.status
         }
       })
     },
@@ -272,13 +315,24 @@ export default {
             placeholder="Lupita de las nieves"
           />
           <label class="infoLabel">Correo electrónico</label>
-          <BaseInputText
-            id="userFormEmail"
-            v-model="email"
-            name="email"
-            type="text"
-            placeholder="lupi.nevada@gmail.com"
-          />
+          <div class="row-warning">
+            <BaseInputText
+              id="userFormEmail"
+              v-model="email"
+              name="email"
+              type="text"
+              placeholder="lupi.nevada@gmail.com"
+              :class="showMailWarning ? 'warning' : ''"
+            />
+            <img
+              v-if="showMailWarning"
+              class="warning-icon"
+              src="@assets/images/warning-icon.png"
+            />
+          </div>
+          <p v-if="showMailWarning" class="warning-message"
+            >Parece que este no es un correo válido</p
+          >
           <label class="infoLabel">Teléfono de contacto</label>
           <BaseInputText
             id="userFormPhone"
@@ -296,21 +350,74 @@ export default {
         <md-dialog-actions>
           <md-button
             :class="validForm === true ? 'primary' : 'primary primary-disabled'"
-            @click="starBookingProcess"
+            @click="goToConfirmMail"
             >Reservar</md-button
           >
         </md-dialog-actions>
       </div>
-      <div v-if="showSuccess === true" style="display: contents;">
+      <div
+        v-if="showMailConfirm === true"
+        id="confirmMail"
+        style="display: contents;"
+      >
+        <md-dialog-title class="pink modal-title">
+          <font-awesome-icon
+            class="chevron-left"
+            :icon="['fa', 'chevron-left']"
+            @click="backFromConfirmMail"
+          />
+          ¿Confirmas que tu correo está bien escrito?
+        </md-dialog-title>
+        <div class="cc-body">
+          <p class="mail">{{ email }}</p>
+          <p class="terms-text">
+            Recuerda que a esta dirección llegarán todos los datos de la reserva
+            y con el podrás validarla.
+          </p>
+        </div>
+        <md-dialog-actions>
+          <md-button class="primary" @click="starBookingProcess"
+            >Sí, confirmo</md-button
+          >
+          <md-button class="btn-cancel" @click="backFromConfirmMail"
+            >No, quiero modificar</md-button
+          >
+        </md-dialog-actions>
+      </div>
+      <div v-if="showSuccess === true" id="success" style="display: contents;">
         <md-dialog-title class="pink modal-title"
           >Reserva exitosa!</md-dialog-title
         >
         <div class="cc-body">
-          <p>Éxito</p>
+          <img src="@assets/images/ok_img.png" class="success-img" />
+          <p class="success-text">
+            Recuerda que bla bla bla confirmar esta reserva debes hacer el
+            depósito de bla bla bla a los datos del mail bla bla bla con plazo
+            bla bla bla.
+          </p>
         </div>
         <md-dialog-actions>
           <md-button class="btn-cancel" @click="backToHome"
             >Volver al inicio</md-button
+          >
+        </md-dialog-actions>
+      </div>
+      <div v-if="showError === true" id="success" style="display: contents;">
+        <md-dialog-title class="pink modal-title"
+          >Oh no, algo salió mal!</md-dialog-title
+        >
+        <div class="cc-body">
+          <img src="@assets/images/error_img.png" class="success-img" />
+          <p class="success-text">
+            Lamentablemente algo pasó y no se logró guardar tu reserva. Intenta
+            una vez más, seguramente ahora sí se podrá sin problema! Si el
+            problema persiste porfavor contactanos al mail adminti@casakutral
+            con el siguiente código de error: {{ failCode }}
+          </p>
+        </div>
+        <md-dialog-actions>
+          <md-button class="primary" @click="starBookingProcess"
+            >Intentar otra vez!</md-button
           >
         </md-dialog-actions>
       </div>
@@ -359,7 +466,7 @@ export default {
   }
   .infoData {
     display: inline-flex;
-    padding-right: 25%;
+    padding-right: 5%;
     padding-bottom: 5%;
     font-family: 'Chilena-regular';
     font-size: 20px;
@@ -449,6 +556,7 @@ export default {
       padding-left: 10%;
     }
     .infoLabel {
+      width: 100%;
       padding-bottom: 5%;
       padding-left: 0%;
     }
@@ -457,10 +565,79 @@ export default {
       margin-top: 0;
       margin-bottom: 0;
     }
+    ._base-input-text_input_cKPEQ {
+      width: 90%;
+    }
+    ._base-input-text_input_cKPEQ.warning {
+      margin-bottom: 0;
+      border: 2px solid $rosado-oscuro;
+    }
     .md-dialog-actions {
       margin-bottom: 10%;
     }
+    .row-warning {
+      display: flex;
+    }
+    .warning-icon {
+      width: 10%;
+      height: 10%;
+      padding-top: 3%;
+      padding-left: 2%;
+    }
+    .warning-message {
+      margin-bottom: 5%;
+      font-family: 'Chilena-regular';
+      font-size: small;
+      font-style: italic;
+      color: $rosado-oscuro;
+    }
   }
+  #success {
+    .modal-title {
+      margin-bottom: 5%;
+    }
+    .success-img {
+      display: block;
+      width: 35%;
+      margin: auto;
+      margin-bottom: 6%;
+    }
+    .success-text {
+      display: inline-flex;
+      padding-right: 6%;
+      padding-bottom: 5%;
+      padding-left: 5%;
+      font-family: 'Chilena-bold';
+      font-size: 18px;
+      font-weight: 700;
+      color: $azul-original;
+      text-align: center;
+    }
+  }
+  #confirmMail {
+    .modal-title {
+      width: 100%;
+    }
+    .cc-body {
+      width: 90%;
+      margin: auto;
+      margin-bottom: 8%;
+      font-family: 'Chilena-Regular';
+      font-size: 16px;
+      color: $azul-oscuro;
+      text-align: center;
+      .mail {
+        margin-bottom: 10%;
+        font-family: 'Chilena-Bold';
+        font-size: 26px;
+        color: $azul-original;
+      }
+    }
+    .btn-cancel {
+      font-size: 15px;
+    }
+  }
+
   .btn-cancel {
     @include terciary-button;
 

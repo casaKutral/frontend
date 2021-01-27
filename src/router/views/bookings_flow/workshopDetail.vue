@@ -103,12 +103,19 @@ export default {
       </div>
       <!-- info del taller -->
       <div class="infoContainer">
-        <p class="md-subheading w-type">{{ workshop.type }}</p>
         <div class="workshopTitle">
           <p class="md-title w-name">{{ workshop.name }}</p>
-          <p class="md-subheading w-cost "
-            >CLP <span class="costBold">${{ workshop.cost }}</span></p
-          >
+          <div class="md-subheading w-type">
+            <span class="type">{{ workshop.type }}</span>
+            <p class="md-subheading w-cost "
+              >CLP <span class="costBold">${{ workshop.cost }}</span></p
+            >
+          </div>
+        </div>
+        <div class="buttonRow">
+          <button class="primary" @click="activeConfirm">
+            Reservar
+          </button>
         </div>
         <p class="md-body-1 regularTxt">{{ workshop.description }}</p>
         <!-- info del profe -->
@@ -121,18 +128,13 @@ export default {
             alt="imagen noticia"
             class="teacherProfile"
           />
-          <div>
+          <div style="display: inline-grid;">
             <p class="md-title teacherName">{{ teacherData.name }}</p>
             <p class="md-subheading teacherSub">{{ teacherData.subtitle }}</p>
           </div>
         </div>
         <div v-if="showTeachersInfo === true" class="teacherBio">
           <p class="md-body-1 regularTxt">{{ teacherData.biography }}</p>
-        </div>
-        <div class="buttonRow">
-          <button class="primary" @click="activeConfirm">
-            Reservar
-          </button>
         </div>
       </div>
     </div>
@@ -150,15 +152,34 @@ export default {
 <style lang="scss">
 @import '@design';
 .infoContainer {
+  z-index: 0;
+  height: 70vh;
+  padding-bottom: 30vh;
   margin-right: 5%;
   margin-left: 5%;
+  overflow-y: scroll;
 }
 .workshopTitle {
-  display: flex;
+  display: block;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 2%;
+  .w-name {
+    margin-bottom: 1%;
+    font-size: 24px !important;
+  }
+  .md-subheading {
+    display: flex;
+  }
+  .type {
+    margin-right: 3%;
+    font-family: 'Averta';
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 800;
+    color: $rosado-oscuro;
+  }
 }
 .detailImg {
   width: 100%;
@@ -208,7 +229,8 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 0;
+  margin-bottom: 5%;
 }
 .primary {
   @include main-button;
