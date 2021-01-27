@@ -14,25 +14,37 @@ export default {
 <template>
   <Layout>
     <div class="home">
-      <img
-        class="banner"
-        src="https://via.placeholder.com/1440x310"
-        alt="Casa Kutral"
-      />
+      <div class="item-flex sectionCarrusel">
+        <img
+          class="banner"
+          src="https://via.placeholder.com/1440x310"
+          alt="Casa Kutral"
+        />
+      </div>
       <div class="titleWrapper">
-        <h1 class="title">Hola! somos Casa Kutral</h1>
+        <h1 class="title desktop">Hola! somos Casa Kutral</h1>
       </div>
       <div class="bloqueInfo sectionAboutUs">
         <div class="about">
-          <img src="https://via.placeholder.com/451x288" />
-          <p class="italicText textAbout">
-            <span>Espacio que nace en manos de una mujer</span>
-            <span>para aportar a la comunidad.</span>
-            <span>Todos portamos un kutral,</span>
-            <span><strong>nuestra energía creadora.</strong></span>
-            <span>Gastronomía y comunidad.</span>
-            <span>Eso y más es Casa Kutral.</span>
-          </p>
+          <div class="item-flex desktop">
+            <img class="" src="https://via.placeholder.com/451x288" />
+          </div>
+          <div class="item-flex">
+            <p class="italicText textAbout desktop">
+              <span>Espacio que nace en manos de una mujer</span>
+              <span>para aportar a la comunidad.</span>
+              <span>Todos portamos un kutral,</span>
+              <span><strong>nuestra energía creadora.</strong></span>
+              <span>Gastronomía y comunidad.</span>
+              <span>Eso y más es Casa Kutral.</span>
+            </p>
+            <h1 class="title mobile">Hola! somos Casa Kutral,</h1>
+            <p class="italicText textAbout mobile">
+              espacio que nace en manos de una mujer para aportar a la
+              comunidad. Todos portamos un kutral, nuestra energía creadora.
+              Gastronomía y comunidad. Eso y más es Casa Kutral
+            </p>
+          </div>
         </div>
       </div>
       <div class="bloqueInfo sectionBannerEnergiaCreadora">
@@ -43,7 +55,7 @@ export default {
       </div>
       <div class="bloqueInfo sectionCards">
         <div class="cardContainer">
-          <div class="card actividades">
+          <div class="card actividades item-flex">
             <p class="italicText title">Actividades</p>
             <svg
               width="48"
@@ -63,7 +75,7 @@ export default {
               standard</p
             >
           </div>
-          <div class="card cocina">
+          <div class="card cocina item-flex">
             <p class="italicText title">Cocina</p>
             <svg
               width="66"
@@ -90,25 +102,25 @@ export default {
             <h1 class="title">Esta semana te recomendamos</h1>
           </div>
           <div class="cardContainer">
-            <div class="card">
+            <div class="card item-flex">
               <img src="https://via.placeholder.com/215x120" alt="yoga" />
               <p class="normalText"><strong>Yoga Flow</strong></p>
             </div>
-            <div class="card">
+            <div class="card item-flex">
               <img
                 src="https://via.placeholder.com/215x120"
                 alt="Pilates Suelo"
               />
               <p class="normalText"><strong>Pilates Suelo</strong></p>
             </div>
-            <div class="card">
+            <div class="card item-flex">
               <img
                 src="https://via.placeholder.com/215x120"
                 alt="Masaje Ayurvédico"
               />
               <p class="normalText"><strong>Masaje Ayurvédico</strong></p>
             </div>
-            <div class="card">
+            <div class="card item-flex">
               <img
                 src="https://via.placeholder.com/215x120"
                 alt="Danza africana"
@@ -125,28 +137,40 @@ export default {
           </div>
           <div class="cardContainer">
             <div class="card">
-              <img src="https://via.placeholder.com/570x160" />
-              <p class="italicText">
-                <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                industry's standard Lorem Ipsum is simply dummy text of the
-                printing typesettinpmg industry. Lorem Ipsum has been the.
-              </p>
+              <div class="item-flex">
+                <img src="https://via.placeholder.com/570x160" />
+              </div>
+              <div class="item-flex">
+                <p class="italicText">
+                  <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
+                  industry's standard Lorem Ipsum is simply dummy text of the
+                  printing typesettinpmg industry. Lorem Ipsum has been the.
+                </p>
+              </div>
             </div>
             <div class="card">
-              <p class="italicText">
-                <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                industry's standard Lorem Ipsum is simply dummy text of the
-                printing typesettinpmg industry. Lorem Ipsum has been the.
-              </p>
-              <img src="https://via.placeholder.com/570x160" />
+              <div class="item-flex">
+                <p class="italicText">
+                  <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
+                  industry's standard Lorem Ipsum is simply dummy text of the
+                  printing typesettinpmg industry. Lorem Ipsum has been the.
+                </p>
+              </div>
+              <div class="item-flex">
+                <img src="https://via.placeholder.com/570x160" />
+              </div>
             </div>
             <div class="card">
-              <img src="https://via.placeholder.com/570x160" />
-              <p class="italicText">
-                <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
-                industry's standard Lorem Ipsum is simply dummy text of the
-                printing typesettinpmg industry. Lorem Ipsum has been the.
-              </p>
+              <div class="item-flex">
+                <img src="https://via.placeholder.com/570x160" />
+              </div>
+              <div class="item-flex">
+                <p class="italicText">
+                  <span><strong>Gypesettinpmg industry rem Ipsum</strong></span>
+                  industry's standard Lorem Ipsum is simply dummy text of the
+                  printing typesettinpmg industry. Lorem Ipsum has been the.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -202,7 +226,16 @@ export default {
         </div>
       </div>
       <div class="bloqueInfo sectionMapa">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.6204938330316!2d-71.49539088486375!3d-32.72271078098849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689bf3b3cf3349f%3A0xc6af07c2b30e3de5!2sAv%20Central%2C%20Puchuncavi%2C%20Puchuncav%C3%AD%2C%20Valpara%C3%ADso!5e0!3m2!1ses!2scl!4v1611623559624!5m2!1ses!2scl" width="1440" height="360" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>  
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.6204938330316!2d-71.49539088486375!3d-32.72271078098849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689bf3b3cf3349f%3A0xc6af07c2b30e3de5!2sAv%20Central%2C%20Puchuncavi%2C%20Puchuncav%C3%AD%2C%20Valpara%C3%ADso!5e0!3m2!1ses!2scl!4v1611623559624!5m2!1ses!2scl"
+          width="1440"
+          height="360"
+          frameborder="0"
+          style="border:0;"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
       </div>
     </div>
   </Layout>
@@ -210,139 +243,376 @@ export default {
 
 <style lang="scss">
 @import '@design';
-.home {
-  width: 100vw;
-  height: 100%;
-  .banner {
+
+@media (max-width: 600px) {
+  .home {
     width: 100%;
-    margin-bottom: 2%;
-  }
-
-  .bloqueInfo {
-    @include bloqueInfo;
-
-    .about {
-      width: 60%;
-      display: inline-flex;
-      .textAbout {
-        margin: 2rem;
-        line-height: 28.8px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
-    }
-
-    &.sectionBannerEnergiaCreadora {
-      @include mediaCover;
-      background-image: url('https://via.placeholder.com/1440x200');
+    height: 100%;
+    .banner {
       width: 100%;
-      border-radius: 0;
-      margin-top: 5%;
-      .title-shadow {
-        @include title;
-        color: white;
-        text-shadow: 2px 3px 3px #00256a;
-      }
+      margin-bottom: 2%;
     }
 
-    &.sectionCards {
-      .cardContainer {
-        width: 60%;
-        display: flex;
-        justify-content: space-between;
-        .card {
-          width: 47%;
-          padding: 1% 3%;
-          margin-top: 8%;
+    .bloqueInfo {
+      @include bloqueInfo;
+
+      &.sectionAboutUs {
+        .about {
+          width: 90%;
+          display: block;
           text-align: center;
-          p {
-            color: white;
-            line-height: 24px;
+          margin: 1rem;
+          .title {
+            margin: 0rem;
           }
-          &.actividades {
-            background-color: $rosado-original;
-            .title {
-              font-size: 20px;
-            }
-          }
-          &.cocina {
-            background-color: $verde-original;
-            .title {
-              font-size: 20px;
-            }
-          }
-        }
-      }
-    }
-    &.sectionRecomendaciones {
-      margin-top: 5%;
-      .container {
-        display: block;
-        width: 80%;
-        .cardContainer {
-          display: flex;
-          justify-content: space-between;
-          .card {
-            text-align: center;
-          }
-        }
-      }
-    }
-    &.sectionNovedades {
-      margin-top: 5%;
-      background-color: $verde-oscuro;
-      .title {
-        color: white;
-      }
-      .container {
-        width: 80%;
-        .cardContainer {
-          padding-bottom: 8%;
-          .card {
-            display: inline-flex;
-            justify-content: space-between;
-            margin-top: 4%;
-            p {
-              line-height: 28.8px;
-              display: flex;
-              justify-content: center;
-              flex-direction: column;
-              margin-left: 5%;
-            }
-          }
-        }
-      }
-    }
-    &.sectionGustos {
-      .container {
-        display: block;
-        width: 80%;
-        .cardContainer {
-          display: flex;
-          justify-content: space-between;
-          .card {
-            width: 28%;
-            flex-wrap: wrap;
+          .textAbout {
+            margin: 0rem;
+            line-height: 21.28px;
             display: flex;
             justify-content: center;
-            img {
-              margin-bottom: 15px;
-            }
+            flex-direction: column;
+          }
+        }
+      }
+
+      &.sectionBannerEnergiaCreadora {
+        @include mediaCover;
+        background-image: url('https://via.placeholder.com/1440x200');
+        width: 100%;
+        border-radius: 0;
+        margin-top: 5%;
+        .title-shadow {
+          @include title;
+          color: white;
+          text-shadow: 2px 3px 3px #00256a;
+        }
+      }
+
+      &.sectionCards {
+        .cardContainer {
+          width: 90%;
+          display: block;
+          justify-content: space-between;
+          .card {
+            width: 100%;
+            padding: 1% 3%;
+            margin-top: 8%;
+            text-align: center;
+            border-radius: 6px;
             p {
-              text-align: center;
-              margin: 10px;
-              color: 000000;
+              color: white;
+              line-height: 19.2px;
+            }
+            svg {
+              width: 10%;
+            }
+            &.actividades {
+              background-color: $rosado-original;
+              .title {
+                font-size: 26px;
+              }
+            }
+            &.cocina {
+              background-color: $verde-original;
+              .title {
+                font-size: 26px;
+              }
             }
           }
         }
       }
+      &.sectionRecomendaciones {
+        margin-top: 5%;
+        .container {
+          display: block;
+          width: 100%;
+          .cardContainer {
+            display: flex;
+            justify-content: space-evenly;
+            text-align: center;
+            flex-wrap: wrap;
+            .card {
+                text-align: center;
+                border-left: 0.5rem solid #ffffff;
+                width: 45%;
+                img{
+                  border-radius: 6px;
+                }
+              }
+          }
+        }
+      }
+      &.sectionNovedades {
+        margin-top: 5%;
+        background-color: $verde-oscuro;
+        .title {
+          color: white;
+        }
+        .container {
+          width: 80%;
+          .cardContainer {
+            padding-bottom: 8%;
+            .card {
+              display: inline-flex;
+              justify-content: space-between;
+              margin-top: 4%;
+              p {
+                line-height: 19.2px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin-left: 5%;
+              }
+              img {
+                border-radius: 6px;
+              }
+              div {
+                justify-content: center;
+                flex-direction: column;
+                display: flex;
+              }
+              &:nth-child(even) {
+                flex-direction: row-reverse;
+              }
+            }
+          }
+        }
+      }
+      &.sectionGustos {
+        .container {
+          display: block;
+          width: 90%;
+          .cardContainer {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            .card {
+              display: block;
+              text-align: center;
+                  width: 48%;
+              img {
+                margin-bottom: 15px;
+              }
+              p {
+                text-align: center;
+                margin: 5px;
+                color: 000000;
+                line-height: 19.2px;
+              }
+            }
+          }
+        }
+      }
+      &.sectionMapa {
+        iframe {
+          width: 100%;
+          height: 360px;
+        }
+      }
     }
-    &.sectionMapa{
-    iframe{
+    .mobile {
+      display: block !important;
+    }
+    .desktop {
+      display: none !important;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .home {
+    width: 100%;
+    height: 100%;
+    .banner {
       width: 100%;
-      height: 360px;
+      margin-bottom: 2%;
     }
+
+    .bloqueInfo {
+      @include bloqueInfo;
+
+      &.sectionAboutUs {
+        .about {
+          width: 90%;
+          display: inline-flex;
+          justify-content: center;
+          .textAbout {
+            margin: 2rem;
+            line-height: 28.8px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+          }
+          img {
+            border-radius: 6px;
+          }
+        }
+      }
+
+      &.sectionBannerEnergiaCreadora {
+        @include mediaCover;
+        background-image: url('https://via.placeholder.com/1440x200');
+        width: 100%;
+        border-radius: 0;
+        margin-top: 5%;
+        .title-shadow {
+          @include title;
+          color: white;
+          text-shadow: 2px 3px 3px #00256a;
+        }
+      }
+
+      &.sectionCards {
+        .cardContainer {
+          width: 90%;
+          display: flex;
+          justify-content: space-between;
+          .card {
+            width: 47%;
+            padding: 1% 3%;
+            margin-top: 8%;
+            text-align: center;
+            border-radius: 6px;
+            p {
+              color: white;
+              line-height: 24px;
+            }
+            &.actividades {
+              background-color: $rosado-original;
+              .title {
+                font-size: 20px;
+              }
+            }
+            &.cocina {
+              background-color: $verde-original;
+              .title {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+      &.sectionRecomendaciones {
+        margin-top: 5%;
+        .container {
+          display: block;
+          width: 90%;
+          .cardContainer {
+            display: flex;
+            justify-content: space-evenly;
+            text-align: center;
+            flex-wrap: wrap;
+            .card {
+                text-align: center;
+                border-left: 0.5rem solid #ffffff;
+                img {
+                  border-radius: 6px;
+                }
+              }
+          }
+        }
+      }
+      &.sectionNovedades {
+        margin-top: 5%;
+        background-color: $verde-oscuro;
+        .title {
+          color: white;
+        }
+        .container {
+          width: 80%;
+          .cardContainer {
+            padding-bottom: 8%;
+            .card {
+              display: inline-flex;
+              justify-content: space-between;
+              margin-top: 4%;
+              p {
+                line-height: 28.8px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin-left: 5%;
+              }
+              div {
+                justify-content: center;
+                flex-direction: column;
+                display: flex;
+              }
+            }
+          }
+        }
+      }
+      &.sectionGustos {
+        .container {
+          display: block;
+          width: 80%;
+          .cardContainer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            .card {
+              display: block;
+              text-align: center;
+              width: 30%;
+              img {
+                margin-bottom: 15px;
+              }
+              p {
+                text-align: center;
+                margin: 10px;
+                color: 000000;
+              }
+            }
+          }
+        }
+      }
+      &.sectionMapa {
+        iframe {
+          width: 100%;
+          height: 360px;
+        }
+      }
+    }
+    .desktop {
+      display: flex !important;
+    }
+    .mobile {
+      display: none !important;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .home {
+    width: 100%;
+    height: 100%;
+    .banner {
+      width: 100%;
+      margin-bottom: 2%;
+    }
+    .bloqueInfo {
+      @include bloqueInfo;
+      .about {
+        width: 60%;
+        img {
+          border-radius: 6px;
+        }
+      }
+      &.sectionCards {
+        .cardContainer {
+          width: 60%;
+        }
+      }
+      &.sectionRecomendaciones {
+        .container {
+          width: 80%;
+        }
+      }
+      &.sectionNovedades {
+        .container {
+          width: 60%;
+        }
+      }
     }
   }
 }
@@ -359,7 +629,7 @@ export default {
 .italicText {
   @include italicText;
 }
-.primary{
+.primary {
   @include main-button;
   background-color: $verde-original;
   margin: 5% 0;

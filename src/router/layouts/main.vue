@@ -11,8 +11,8 @@ export default {
 <template>
   <div>
     <NavBar />
-    <BottomNavbar />
     <slot />
+    <BottomNavbar />
     <Footer />
   </div>
 </template>

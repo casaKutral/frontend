@@ -101,7 +101,7 @@
     flex-direction: column;
     .containIconos{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         width: 100%;
         svg{
             width:7%;
