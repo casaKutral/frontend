@@ -1,17 +1,19 @@
 <script>
 import NavBar from '@components/nav-bar.vue'
 import BottomNavbar from '@components/bottomNavbar.vue'
+import Footer from '@components/footer.vue'
 
 export default {
-  components: { NavBar, BottomNavbar },
+  components: { NavBar, BottomNavbar, Footer },
 }
 </script>
 
 <template>
   <div>
     <NavBar />
-    <BottomNavbar />
     <slot />
+    <BottomNavbar />
+    <Footer />
   </div>
 </template>
 

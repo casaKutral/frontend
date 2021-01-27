@@ -42,3 +42,11 @@ $content-font-weight: 400;
   font-weight: normal;
   color: $azul-oscuro;
 }
+
+@mixin italicText {
+  font-family: 'Chilena-Regular';
+  font-size: 16px;
+  font-style: italic;
+  font-weight: normal;
+  color: $azul-oscuro;
+}
