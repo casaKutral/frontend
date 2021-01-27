@@ -17,7 +17,7 @@ export default {
       <div class="item-flex sectionCarrusel">
         <img
           class="banner"
-          src="https://via.placeholder.com/1440x310"
+          src="../../assets/images/desktop/carrusel/carrusel_1.png"
           alt="Casa Kutral"
         />
       </div>
@@ -27,7 +27,10 @@ export default {
       <div class="bloqueInfo sectionAboutUs">
         <div class="about">
           <div class="item-flex desktop">
-            <img class="" src="https://via.placeholder.com/451x288" />
+            <img
+              class=""
+              src="../../assets/images/desktop/hola_somos_kutral_desktop.png"
+            />
           </div>
           <div class="item-flex">
             <p class="italicText textAbout desktop">
@@ -103,26 +106,29 @@ export default {
           </div>
           <div class="cardContainer">
             <div class="card item-flex">
-              <img src="https://via.placeholder.com/215x120" alt="yoga" />
+              <img
+                src="../../assets/images/desktop/actividades/yoga_flow.png"
+                alt="yoga"
+              />
               <p class="normalText"><strong>Yoga Flow</strong></p>
             </div>
             <div class="card item-flex">
               <img
-                src="https://via.placeholder.com/215x120"
+                src="../../assets/images/desktop/actividades/pilates_suelo.png"
                 alt="Pilates Suelo"
               />
               <p class="normalText"><strong>Pilates Suelo</strong></p>
             </div>
             <div class="card item-flex">
               <img
-                src="https://via.placeholder.com/215x120"
+                src="../../assets/images/desktop/actividades/masaje.png"
                 alt="Masaje Ayurvédico"
               />
               <p class="normalText"><strong>Masaje Ayurvédico</strong></p>
             </div>
             <div class="card item-flex">
               <img
-                src="https://via.placeholder.com/215x120"
+                src="../../assets/images/desktop/actividades/danza.png"
                 alt="Danza africana"
               />
               <p class="normalText"><strong>Danza africana</strong></p>
@@ -138,7 +144,16 @@ export default {
           <div class="cardContainer">
             <div class="card">
               <div class="item-flex">
-                <img src="https://via.placeholder.com/570x160" />
+                <img
+                  class="desktop"
+                  src="../../assets/images/desktop/novedades_1-2-3_desktop.png"
+                />
+              </div>
+              <div class="imgMobile">
+                <img
+                  class="mobile"
+                  src="../../assets/images/mobile/novedades_1-2-3.png"
+                />
               </div>
               <div class="item-flex">
                 <p class="italicText">
@@ -156,13 +171,31 @@ export default {
                   printing typesettinpmg industry. Lorem Ipsum has been the.
                 </p>
               </div>
+              <div class="imgMobile">
+                <img
+                  class="mobile"
+                  src="../../assets/images/mobile/novedades_1-2-3.png"
+                />
+              </div>
               <div class="item-flex">
-                <img src="https://via.placeholder.com/570x160" />
+                <img
+                  class="desktop"
+                  src="../../assets/images/desktop/novedades_1-2-3_desktop.png"
+                />
               </div>
             </div>
             <div class="card">
               <div class="item-flex">
-                <img src="https://via.placeholder.com/570x160" />
+                <img
+                  class="desktop"
+                  src="../../assets/images/desktop/novedades_1-2-3_desktop.png"
+                />
+              </div>
+              <div class="imgMobile">
+                <img
+                  class="mobile"
+                  src="../../assets/images/mobile/novedades_1-2-3.png"
+                />
               </div>
               <div class="item-flex">
                 <p class="italicText">
@@ -176,7 +209,10 @@ export default {
         </div>
       </div>
       <div class="bloqueInfo sectionBannerSeparador">
-        <img class="banner" src="https://via.placeholder.com/1440x200" />
+        <h2 class="title-shadow">
+          <span>Todos portamos un kutral,</span><br />
+          <span>nuestra energía creadora. </span>
+        </h2>
       </div>
       <div class="bloqueInfo sectionGustos">
         <div class="container">
@@ -186,7 +222,7 @@ export default {
           <div class="cardContainer">
             <div class="card">
               <img
-                src="https://via.placeholder.com/330x295"
+                src="../../assets/images/desktop/date_un_gusto/comida_1.png"
                 alt="loren ipsum"
               />
               <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
@@ -197,7 +233,7 @@ export default {
             </div>
             <div class="card">
               <img
-                src="https://via.placeholder.com/330x295"
+                src="../../assets/images/desktop/date_un_gusto/comida_2.png"
                 alt="loren ipsum"
               />
               <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
@@ -208,7 +244,7 @@ export default {
             </div>
             <div class="card">
               <img
-                src="https://via.placeholder.com/330x295"
+                src="../../assets/images/desktop/date_un_gusto/comida_3.png"
                 alt="loren ipsum"
               />
               <p class="normalText"><strong>Gypesettinpmg industry</strong> </p>
@@ -277,7 +313,7 @@ export default {
 
       &.sectionBannerEnergiaCreadora {
         @include mediaCover;
-        background-image: url('https://via.placeholder.com/1440x200');
+        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
         width: 100%;
         border-radius: 0;
         margin-top: 5%;
@@ -332,14 +368,24 @@ export default {
             text-align: center;
             flex-wrap: wrap;
             .card {
-                text-align: center;
-                border-left: 0.5rem solid #ffffff;
-                width: 45%;
-                img{
-                  border-radius: 6px;
-                }
+              text-align: center;
+              border-left: 0.5rem solid #ffffff;
+              width: 45%;
+              img {
+                border-radius: 6px;
               }
+            }
           }
+        }
+      }
+      &.sectionBannerSeparador {
+        @include mediaCover;
+        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+        width: 100%;
+        border-radius: 0;
+        margin-bottom: 5%;
+        .title-shadow {
+          color: transparent;
         }
       }
       &.sectionNovedades {
@@ -362,9 +408,13 @@ export default {
                 justify-content: center;
                 flex-direction: column;
                 margin-left: 5%;
+                color: white;
               }
               img {
                 border-radius: 6px;
+                &.mobile {
+                  height: fit-content;
+                }
               }
               div {
                 justify-content: center;
@@ -373,6 +423,12 @@ export default {
               }
               &:nth-child(even) {
                 flex-direction: row-reverse;
+              }
+              .imgMobile {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
               }
             }
           }
@@ -389,7 +445,8 @@ export default {
             .card {
               display: block;
               text-align: center;
-                  width: 48%;
+              width: 48%;
+              margin-top: 2rem;
               img {
                 margin-bottom: 15px;
               }
@@ -421,7 +478,7 @@ export default {
 
 @media (min-width: 600px) {
   .home {
-    width: 100%;
+    width: 100vw;
     height: 100%;
     .banner {
       width: 100%;
@@ -446,12 +503,16 @@ export default {
           img {
             border-radius: 6px;
           }
+          .desktop {
+            justify-content: center;
+            flex-direction: column;
+          }
         }
       }
 
       &.sectionBannerEnergiaCreadora {
         @include mediaCover;
-        background-image: url('https://via.placeholder.com/1440x200');
+        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
         width: 100%;
         border-radius: 0;
         margin-top: 5%;
@@ -503,13 +564,23 @@ export default {
             text-align: center;
             flex-wrap: wrap;
             .card {
-                text-align: center;
-                border-left: 0.5rem solid #ffffff;
-                img {
-                  border-radius: 6px;
-                }
+              text-align: center;
+              border-left: 0.5rem solid #ffffff;
+              img {
+                border-radius: 6px;
               }
+            }
           }
+        }
+      }
+      &.sectionBannerSeparador {
+        @include mediaCover;
+        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+        width: 100%;
+        border-radius: 0;
+        margin-bottom: 5%;
+        .title-shadow {
+          color: transparent;
         }
       }
       &.sectionNovedades {
@@ -532,17 +603,31 @@ export default {
                 justify-content: center;
                 flex-direction: column;
                 margin-left: 5%;
+                color: white;
               }
               div {
                 justify-content: center;
                 flex-direction: column;
                 display: flex;
               }
+              img {
+                border-radius: 6px;
+              }
+              .imgMobile {
+                display: none;
+              }
+              &:nth-child(even) {
+                p {
+                  margin-left: 0%;
+                  margin-right: 5%;
+                }
+              }
             }
           }
         }
       }
       &.sectionGustos {
+        margin-bottom: 3%;
         .container {
           display: block;
           width: 80%;
@@ -584,12 +669,6 @@ export default {
 
 @media (min-width: 1200px) {
   .home {
-    width: 100%;
-    height: 100%;
-    .banner {
-      width: 100%;
-      margin-bottom: 2%;
-    }
     .bloqueInfo {
       @include bloqueInfo;
       .about {
