@@ -1,13 +1,14 @@
 <script>
 import appConfig from '@src/app.config'
 import Layout from '@layouts/main.vue'
+import { Carousel, Slide } from 'vue-carousel'
 
 export default {
   page: {
     title: 'Home',
     meta: [{ name: 'description', content: appConfig.description }],
   },
-  components: { Layout },
+  components: { Layout, Carousel, Slide },
 }
 </script>
 
@@ -15,11 +16,55 @@ export default {
   <Layout>
     <div class="home">
       <div class="item-flex sectionCarrusel">
-        <img
-          class="banner"
-          src="../../assets/images/desktop/carrusel/carrusel_1.png"
-          alt="Casa Kutral"
-        />
+        <Carousel
+          :per-page="1"
+          autoplay="true"
+          autoplayTimeout="3000"
+          speed="700"
+          loop="true"
+          paginationSize="1px"
+        >
+          <Slide class="carruselSlide">
+            <img
+              class="desktop"
+              src="../../assets/images/desktop/carrusel/carrusel_1.png"
+            />
+            <img
+              class="mobile"
+              src="../../assets/images/mobile/carrusel/carrusel_mobile_1.png"
+            />
+          </Slide>
+          <Slide class="carruselSlide">
+            <img
+              class="desktop"
+              src="../../assets/images/desktop/carrusel/carrusel_2.png"
+            />
+            <img
+              class="mobile"
+              src="../../assets/images/mobile/carrusel/carrusel_mobile_2.png"
+            />
+          </Slide>
+          <Slide class="carruselSlide">
+            <img
+              class="desktop"
+              src="../../assets/images/desktop/carrusel/carrusel_3.png"
+            />
+            <img
+              class="mobile"
+              src="../../assets/images/mobile/carrusel/carrusel_mobile_3.png"
+            />
+          </Slide>
+          <Slide class="carruselSlide">
+            <img
+              class="desktop"
+              src="../../assets/images/desktop/carrusel/carrusel_4.png"
+            />
+            <img
+              class="mobile"
+              src="../../assets/images/mobile/carrusel/carrusel_mobile_4.png"
+            />
+          </Slide>
+        </Carousel>
       </div>
       <div class="titleWrapper">
         <h1 class="title desktop">Hola! somos Casa Kutral</h1>
@@ -28,7 +73,6 @@ export default {
         <div class="about">
           <div class="item-flex desktop">
             <img
-              class=""
               src="../../assets/images/desktop/hola_somos_kutral_desktop.png"
             />
           </div>
@@ -289,10 +333,23 @@ export default {
       margin-bottom: 2%;
     }
 
+    .sectionCarrusel {
+      .carruselSlide {
+        flex-basis: auto;
+        img {
+          width: 100vw;
+          padding: 18px;
+          border-radius: 6px;
+          border: 1px solid #ffffff;
+        }
+      }
+    }
+
     .bloqueInfo {
       @include bloqueInfo;
 
       &.sectionAboutUs {
+        margin-top: -12%;
         .about {
           width: 90%;
           display: block;
@@ -484,11 +541,20 @@ export default {
       width: 100%;
       margin-bottom: 2%;
     }
+    .sectionCarrusel {
+      .carruselSlide {
+        flex-basis: auto;
+        img {
+          width: 100vw;
+        }
+      }
+    }
 
     .bloqueInfo {
       @include bloqueInfo;
 
       &.sectionAboutUs {
+      margin-top: 0%;
         .about {
           width: 90%;
           display: inline-flex;
