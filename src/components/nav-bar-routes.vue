@@ -27,13 +27,13 @@ export default {
       const current = props.currentRoute
       const routeName = route.title
       switch (current) {
-        case '/reservas':
-          if (routeName === 'Reservar') {
+        case '/actividades':
+          if (routeName === 'Actividades') {
             return require(`../assets/images/${route.icon}_active.png`)
           } else {
             return require(`../assets/images/${route.icon}.png`)
           }
-        case '/productos':
+        case '/cocina':
           if (routeName === 'Cocina') {
             return require(`../assets/images/${route.icon}_active.png`)
           } else {

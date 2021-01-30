@@ -1,9 +1,10 @@
 <script>
+import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import UserFormModal from '@/src/components/bookings_elements/userFormModal.vue'
 import CalendarCard from '@src/components/bookings_elements/calendarCard.vue'
 
 export default {
-  components: { UserFormModal, CalendarCard },
+  components: { UserFormModal, CalendarCard, MobileNavbar },
   props: {
     workshop: {
       type: Object,
@@ -105,7 +106,7 @@ export default {
 
 <template>
   <div>
-    <a @click="$emit('back')">back</a>
+    <MobileNavbar :show-back-button="true" @back="$emit('back')" />
     <div v-if="workshop !== null">
       <div class="infoContainer">
         <p class="md-subheading sm pink">{{ workshop.type }}</p>

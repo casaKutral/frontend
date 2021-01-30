@@ -1,8 +1,9 @@
 <script>
+import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import WorkshopDetail from './workshopDetail.vue'
 
 export default {
-  components: { WorkshopDetail },
+  components: { WorkshopDetail, MobileNavbar },
   props: {
     workshopsList: {
       type: Object,
@@ -37,12 +38,8 @@ export default {
 <template>
   <div>
     <div v-if="showList && workshopsList !== null">
+      <MobileNavbar :show-back-button="true" @back="$emit('back')" />
       <div class="header">
-        <div class="backButtonWrapper">
-          <a class="backButton" @click="$emit('back')">
-            <font-awesome-icon :icon="['far', 'arrow-alt-circle-left']" />
-          </a>
-        </div>
         <div class="titleWrapperList">
           <h1 class="title">{{ workshopsList.plural }}</h1>
         </div>
@@ -55,10 +52,7 @@ export default {
         @click="activeDetail(workshop)"
       >
         <div class="workshopImgCol">
-          <img
-            class="workshopImg"
-            src="../../../assets/images/yoga_ejemplo.jpg"
-          />
+          <img class="workshopImg" :src="workshop.picture" />
         </div>
         <div class="workshopInfoWrapper">
           <p class="md-subheading w-cost">${{ workshop.cost }}</p>

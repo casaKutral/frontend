@@ -12,17 +12,17 @@ export default {
           title: 'Home',
         },
         {
-          name: 'Blog de cocina',
-          title: 'Blog de cocina',
+          name: 'Actividades',
+          title: 'Actividades',
         },
         {
-          name: 'Catalogo de productos',
-          title: 'Catalogo de productos',
+          name: 'Cocina',
+          title: 'Cocina',
         },
-        {
-          name: 'Reservas Kutral',
-          title: 'Reservas Kutral',
-        },
+        // {
+        //   name: 'Catalogo de productos',
+        //   title: 'Catalogo de productos',
+        // },
       ],
       loggedInNavRoutes: [
         {
@@ -35,10 +35,10 @@ export default {
         },
       ],
       loggedOutNavRoutes: [
-        {
-          name: 'loginAdmin',
-          title: 'Admin',
-        },
+        // {
+        //   name: 'loginAdmin',
+        //   title: 'Admin',
+        // },
       ],
     }
   },
@@ -60,14 +60,24 @@ export default {
 @import '@design';
 
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 72px;
   padding: 0;
-  margin: 0 0 $size-grid-padding;
-  text-align: center;
+  padding-right: 10%;
+  margin: 0;
   list-style-type: none;
+  background-color: darkblue;
 
   > li {
-    display: inline-block;
-    margin-right: $size-grid-padding;
+    display: block;
+    margin-right: 6.3rem;
+    a {
+      font-family: 'CHILENA-REGULAR';
+      font-size: 22px;
+      color: white !important;
+    }
   }
 }
 

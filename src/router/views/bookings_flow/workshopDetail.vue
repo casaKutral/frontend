@@ -1,9 +1,10 @@
 <script>
 import store from '@state/store'
+import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import WorkshopBooking from './workshopBooking.vue'
 
 export default {
-  components: { WorkshopBooking },
+  components: { WorkshopBooking, MobileNavbar },
   props: {
     workshop: {
       type: Object,
@@ -81,12 +82,8 @@ export default {
 <template>
   <div>
     <div v-if="showDetail && workshop !== null">
+      <MobileNavbar :show-back-button="true" @back="$emit('back')" />
       <div class="header">
-        <div class="backButtonWrapper">
-          <a class="backButton" @click="$emit('back')">
-            <font-awesome-icon :icon="['far', 'arrow-alt-circle-left']" />
-          </a>
-        </div>
         <div class="titleWrapperList">
           <h1>{{ workshop.name }}</h1>
         </div>
@@ -96,8 +93,7 @@ export default {
         v-if="showTeachersInfo"
         class="detailImg"
         :style="{
-          backgroundImage:
-            'url(' + require('../../../assets/images/yoga_ejemplo.jpg') + ')',
+          backgroundImage: `url(${workshop.picture})`,
         }"
       >
       </div>

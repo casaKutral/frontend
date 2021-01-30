@@ -19,6 +19,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 import { faPlusCircle, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import App from './app.vue'
 // Globally register all `_base`-prefixed components
 import '@components/_globals'
@@ -27,6 +28,7 @@ library.add(faArrowAltCircleLeft)
 library.add(faClock)
 library.add(faPlusCircle)
 library.add(faChevronLeft)
+library.add(faWhatsapp)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

@@ -1,7 +1,9 @@
 <script>
+import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import WorkshopList from './workshopList.vue'
+
 export default {
-  components: { WorkshopList },
+  components: { WorkshopList, MobileNavbar },
   props: {
     workshopsCategorys: {
       type: Array,
@@ -43,31 +45,24 @@ export default {
         case 0:
           return {
             'background-image':
-              'url(' + require('../../../assets/images/yoga_ejemplo.jpg') + ')',
+              'url( https://backend.casakutral.vercel.app/images/yoga_ejemplo.jpg)',
           }
-        // break;
         case 1:
           return {
             'background-image':
-              'url(' +
-              require('../../../assets/images/masaje_example.jpg') +
-              ')',
+              'url( https://backend.casakutral.vercel.app/images/masaje_ejemplo.jpg)',
           }
         // break;
         case 2:
           return {
             'background-image':
-              'url(' +
-              require('../../../assets/images/terapias_example.webp') +
-              ')',
+              'url( https://backend.casakutral.vercel.app/images/terapia_ejemplo.webp)',
           }
         // break;
         case 3:
           return {
             'background-image':
-              'url(' +
-              require('../../../assets/images/category_example.png') +
-              ')',
+              'url( https://backend.casakutral.vercel.app/images/categoria_ejemplo.png)',
           }
       }
     },
@@ -78,6 +73,10 @@ export default {
 <template>
   <div>
     <div v-if="showCategory === true && workshopsCategorys.length > 0">
+      <MobileNavbar
+        :show-back-button="true"
+        @back="$router.push({ path: '/' })"
+      />
       <div class="titleWrapper">
         <h1 class="title">¿Qué te gustaría hacer?</h1>
       </div>
