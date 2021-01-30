@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
 import router from '@router'
 import store from '@state/store'
 import {
