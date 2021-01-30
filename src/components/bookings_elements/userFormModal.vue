@@ -137,6 +137,8 @@ export default {
           cost: this.totalValue,
           status: 'pending',
           workshop_id: this.workshopId,
+          workshop_name: this.workshopName,
+          teacher_name: this.teacherName,
           user_id: '',
           user_name: this.name,
           user_email: this.email,

@@ -12,14 +12,14 @@ export default [
     component: () => lazyLoadView(import('@views/blog.vue')),
   },
   {
-    path: '/productos',
-    name: 'Catalogo de productos',
-    component: () => lazyLoadView(import('@views/marketplace.vue')),
+    path: '/actividades',
+    name: 'Actividades',
+    component: () => lazyLoadView(import('@views/bookings.vue')),
   },
   {
-    path: '/reservas',
-    name: 'Reservas Kutral',
-    component: () => lazyLoadView(import('@views/bookings.vue')),
+    path: '/cocina',
+    name: 'Cocina',
+    component: () => lazyLoadView(import('@views/marketplace.vue')),
   },
   {
     path: '/admin-login',

@@ -12,19 +12,19 @@ export default {
           title: 'Inicio',
           icon: 'home_icon',
         },
+        // {
+        //   name: 'Blog de cocina',
+        //   title: 'Blog',
+        //   icon: 'blog_icon',
+        // },
         {
-          name: 'Blog de cocina',
-          title: 'Blog',
-          icon: 'blog_icon',
-        },
-        {
-          name: 'Catalogo de productos',
+          name: 'Cocina',
           title: 'Cocina',
           icon: 'market_icon',
         },
         {
-          name: 'Reservas Kutral',
-          title: 'Reservar',
+          name: 'Actividades',
+          title: 'Actividades',
           icon: 'bookings_icon',
         },
       ],
@@ -60,6 +60,7 @@ export default {
     z-index: 3;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     width: 100%;
     padding-top: 3%;
     padding-right: 0;

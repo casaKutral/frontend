@@ -1,4 +1,5 @@
 <script>
+import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import appConfig from '@src/app.config'
 import Layout from '@layouts/main.vue'
 import { Carousel, Slide } from 'vue-carousel'
@@ -8,12 +9,14 @@ export default {
     title: 'Home',
     meta: [{ name: 'description', content: appConfig.description }],
   },
-  components: { Layout, Carousel, Slide },
+
+  components: { Layout, Carousel, Slide,  MobileNavbar },
 }
 </script>
 
 <template>
   <Layout>
+    <MobileNavbar :show-back-button="false" />
     <div class="home">
       <div class="item-flex sectionCarrusel">
         <Carousel
@@ -351,31 +354,33 @@ export default {
       &.sectionAboutUs {
         margin-top: -12%;
         .about {
-          width: 90%;
           display: block;
-          text-align: center;
+          width: 90%;
           margin: 1rem;
+          text-align: center;
           .title {
-            margin: 0rem;
+            margin: 0;
           }
           .textAbout {
-            margin: 0rem;
-            line-height: 21.28px;
             display: flex;
-            justify-content: center;
             flex-direction: column;
+            justify-content: center;
+            margin: 0;
+            line-height: 21.28px;
           }
         }
       }
 
       &.sectionBannerEnergiaCreadora {
         @include mediaCover;
-        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
+
         width: 100%;
-        border-radius: 0;
         margin-top: 5%;
+        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
+        border-radius: 0;
         .title-shadow {
           @include title;
+
           color: white;
           text-shadow: 2px 3px 3px #00256a;
         }
@@ -383,9 +388,9 @@ export default {
 
       &.sectionCards {
         .cardContainer {
-          width: 90%;
           display: block;
           justify-content: space-between;
+          width: 90%;
           .card {
             width: 100%;
             padding: 1% 3%;
@@ -393,8 +398,8 @@ export default {
             text-align: center;
             border-radius: 6px;
             p {
-              color: white;
               line-height: 19.2px;
+              color: white;
             }
             svg {
               width: 10%;
@@ -421,13 +426,13 @@ export default {
           width: 100%;
           .cardContainer {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-evenly;
             text-align: center;
-            flex-wrap: wrap;
             .card {
-              text-align: center;
-              border-left: 0.5rem solid #ffffff;
               width: 45%;
+              text-align: center;
+              border-left: 0.5rem solid #fff;
               img {
                 border-radius: 6px;
               }
@@ -437,10 +442,11 @@ export default {
       }
       &.sectionBannerSeparador {
         @include mediaCover;
-        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+
         width: 100%;
-        border-radius: 0;
         margin-bottom: 5%;
+        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+        border-radius: 0;
         .title-shadow {
           color: transparent;
         }
@@ -460,11 +466,11 @@ export default {
               justify-content: space-between;
               margin-top: 4%;
               p {
-                line-height: 19.2px;
                 display: flex;
-                justify-content: center;
                 flex-direction: column;
+                justify-content: center;
                 margin-left: 5%;
+                line-height: 19.2px;
                 color: white;
               }
               img {
@@ -474,18 +480,18 @@ export default {
                 }
               }
               div {
-                justify-content: center;
-                flex-direction: column;
                 display: flex;
+                flex-direction: column;
+                justify-content: center;
               }
               &:nth-child(even) {
                 flex-direction: row-reverse;
               }
               .imgMobile {
                 display: flex;
-                width: 100%;
-                justify-content: center;
                 flex-direction: column;
+                justify-content: center;
+                width: 100%;
               }
             }
           }
@@ -497,21 +503,21 @@ export default {
           width: 90%;
           .cardContainer {
             display: flex;
-            justify-content: space-evenly;
             flex-wrap: wrap;
+            justify-content: space-evenly;
             .card {
               display: block;
-              text-align: center;
               width: 48%;
               margin-top: 2rem;
+              text-align: center;
               img {
                 margin-bottom: 15px;
               }
               p {
-                text-align: center;
                 margin: 5px;
-                color: 000000;
                 line-height: 19.2px;
+                color: 000000;
+                text-align: center;
               }
             }
           }
@@ -556,34 +562,36 @@ export default {
       &.sectionAboutUs {
       margin-top: 0%;
         .about {
-          width: 90%;
           display: inline-flex;
           justify-content: center;
+          width: 90%;
           .textAbout {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             margin: 2rem;
             line-height: 28.8px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
           }
           img {
             border-radius: 6px;
           }
           .desktop {
-            justify-content: center;
             flex-direction: column;
+            justify-content: center;
           }
         }
       }
 
       &.sectionBannerEnergiaCreadora {
         @include mediaCover;
-        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
+
         width: 100%;
-        border-radius: 0;
         margin-top: 5%;
+        background-image: url('../../assets/images/desktop/banner_energia_creadora_desktop.png');
+        border-radius: 0;
         .title-shadow {
           @include title;
+
           color: white;
           text-shadow: 2px 3px 3px #00256a;
         }
@@ -591,9 +599,9 @@ export default {
 
       &.sectionCards {
         .cardContainer {
-          width: 90%;
           display: flex;
           justify-content: space-between;
+          width: 90%;
           .card {
             width: 47%;
             padding: 1% 3%;
@@ -601,8 +609,8 @@ export default {
             text-align: center;
             border-radius: 6px;
             p {
-              color: white;
               line-height: 24px;
+              color: white;
             }
             &.actividades {
               background-color: $rosado-original;
@@ -626,12 +634,12 @@ export default {
           width: 90%;
           .cardContainer {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-evenly;
             text-align: center;
-            flex-wrap: wrap;
             .card {
               text-align: center;
-              border-left: 0.5rem solid #ffffff;
+              border-left: 0.5rem solid #fff;
               img {
                 border-radius: 6px;
               }
@@ -641,10 +649,11 @@ export default {
       }
       &.sectionBannerSeparador {
         @include mediaCover;
-        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+
         width: 100%;
-        border-radius: 0;
         margin-bottom: 5%;
+        background-image: url('../../assets/images/desktop/banner_separador_desktop.png');
+        border-radius: 0;
         .title-shadow {
           color: transparent;
         }
@@ -664,17 +673,17 @@ export default {
               justify-content: space-between;
               margin-top: 4%;
               p {
-                line-height: 28.8px;
                 display: flex;
-                justify-content: center;
                 flex-direction: column;
+                justify-content: center;
                 margin-left: 5%;
+                line-height: 28.8px;
                 color: white;
               }
               div {
-                justify-content: center;
-                flex-direction: column;
                 display: flex;
+                flex-direction: column;
+                justify-content: center;
               }
               img {
                 border-radius: 6px;
@@ -684,8 +693,8 @@ export default {
               }
               &:nth-child(even) {
                 p {
-                  margin-left: 0%;
                   margin-right: 5%;
+                  margin-left: 0%;
                 }
               }
             }
@@ -699,19 +708,19 @@ export default {
           width: 80%;
           .cardContainer {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
+            justify-content: space-between;
             .card {
               display: block;
-              text-align: center;
               width: 30%;
+              text-align: center;
               img {
                 margin-bottom: 15px;
               }
               p {
-                text-align: center;
                 margin: 10px;
                 color: 000000;
+                text-align: center;
               }
             }
           }
@@ -776,7 +785,8 @@ export default {
 }
 .primary {
   @include main-button;
-  background-color: $verde-original;
+
   margin: 5% 0;
+  background-color: $verde-original;
 }
 </style>
