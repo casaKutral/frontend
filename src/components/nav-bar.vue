@@ -50,9 +50,19 @@ export default {
 
 <template>
   <ul :class="$style.container">
-    <NavBarRoutes :routes="persistentNavRoutes" />
-    <NavBarRoutes v-if="loggedIn" :routes="loggedInNavRoutes" />
-    <NavBarRoutes v-else :routes="loggedOutNavRoutes" />
+    <h1>CASA KUTRAL</h1>
+    <span>
+      <NavBarRoutes :routes="persistentNavRoutes" />
+      <NavBarRoutes v-if="loggedIn" :routes="loggedInNavRoutes" />
+      <NavBarRoutes v-else :routes="loggedOutNavRoutes" />
+      <a
+        class="whatsappBtn"
+        target="blank"
+        href="https://api.whatsapp.com/send?phone=+56948628194"
+      >
+        <font-awesome-icon class="whatsappIcon" :icon="['fab', 'whatsapp']" />
+      </a>
+    </span>
   </ul>
 </template>
 
@@ -62,15 +72,27 @@ export default {
 .container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 72px;
   padding: 0;
   padding-right: 10%;
+  padding-left: 5%;
   margin: 0;
   list-style-type: none;
-  background-color: darkblue;
+  background-color: $azul-original;
 
-  > li {
+  h1 {
+    @include logoTitle;
+
+    color: white;
+  }
+  span {
+    display: inline-flex;
+    justify-content: space-around;
+    width: 45%;
+  }
+
+  li {
     display: block;
     margin-right: 6.3rem;
     a {
@@ -79,6 +101,10 @@ export default {
       color: white !important;
     }
   }
+}
+a.whatsappBtn .whatsappIcon {
+  font-size: 40px !important;
+  color: white;
 }
 
 @media (max-width: 600px) {

@@ -15,6 +15,9 @@ export default [
     path: '/actividades',
     name: 'Actividades',
     component: () => lazyLoadView(import('@views/bookings.vue')),
+    props(route) {
+      return { noticia: route.query.workshop_id }
+    },
   },
   {
     path: '/cocina',

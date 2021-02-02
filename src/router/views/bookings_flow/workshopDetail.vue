@@ -38,7 +38,7 @@ export default {
     }
   },
   created: function() {
-    if (this.workshop !== null) {
+    if (this.workshop._id) {
       this.searchTeacher()
       this.fetchFirst()
     }
@@ -51,13 +51,18 @@ export default {
           return teacher
         }
       })
+      this.loading = false
       this.showTeachersInfo = true
     },
     activeConfirm() {
       this.showDetail = false
     },
     backFromConfirm() {
-      this.showDetail = true
+      if (this.$route.query.workshopId) {
+        this.$router.push('/')
+      } else {
+        this.showDetail = true
+      }
     },
     fetchFirst: function() {
       store.dispatch('workshops/fetchHours').then((data) => {
@@ -83,17 +88,12 @@ export default {
   <div>
     <div v-if="showDetail && workshop !== null">
       <MobileNavbar :show-back-button="true" @back="$emit('back')" />
-      <div class="header">
-        <div class="titleWrapperList">
-          <h1>{{ workshop.name }}</h1>
-        </div>
-      </div>
       <!-- img del taller -->
       <div
         v-if="showTeachersInfo"
         class="detailImg"
         :style="{
-          backgroundImage: `url(${workshop.picture})`,
+          backgroundImage: `url(${workshop.pictureDesktop})`,
         }"
       >
       </div>
@@ -120,7 +120,7 @@ export default {
           class="workshopTitle teacherWrapper"
         >
           <img
-            src="../../../assets/images/teacher_example.jpg"
+            :src="teacherData.profile_picture"
             alt="imagen noticia"
             class="teacherProfile"
           />
@@ -134,7 +134,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="!showDetail">
       <WorkshopBooking
         :workshop="workshop"
         :hours="workshopsHours"
@@ -196,6 +196,9 @@ export default {
   border: 5px solid $rosado-original;
   border-radius: 50px;
 }
+.teacherBio {
+  margin-top: 5%;
+}
 .teacherName {
   @include title;
 
@@ -225,7 +228,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  margin-top: 0;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 .primary {

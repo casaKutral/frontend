@@ -6,7 +6,7 @@
           <strong>Avenida Central 1335,</strong><br />
           Maitencillo, Puchuncaví, V región Valparaíso, Chile.
         </p>
-       <p :class="$style.normalText"
+        <p :class="$style.normalText"
           ><span
             ><svg
               width="18"
@@ -33,10 +33,12 @@
               <path
                 d="M15.2802 0.768111L12.0302 0.0181114C11.677 -0.0631386 11.3145 0.121236 11.1708 0.452486L9.67078 3.95249C9.53953 4.25874 9.62703 4.61811 9.88641 4.82749L11.7802 6.37749C10.6552 8.77436 8.68954 10.7681 6.24266 11.915L4.69266 10.0212C4.48016 9.76186 4.12391 9.67436 3.81766 9.80561L0.317659 11.3056C-0.0167155 11.4525 -0.201091 11.815 -0.119841 12.1681L0.630159 15.4181C0.708284 15.7556 1.00828 15.9994 1.36141 15.9994C9.36453 15.9994 15.8614 9.51499 15.8614 1.49936C15.8614 1.14936 15.6208 0.846236 15.2802 0.768111Z"
                 fill="white"
-              />
-            </svg></span
-          >&nbsp;+56949380469</p>
-        <a href="mailto:hola@casakutral.cl"><p :class="$style.normalText">hola@casakutral.cl</p></a>
+              /></svg></span
+          >&nbsp;+56949380469</p
+        >
+        <a href="mailto:hola@casakutral.cl"
+          ><p :class="$style.normalText">hola@casakutral.cl</p></a
+        >
       </div>
       <div :class="$style.iconos">
         <div :class="$style.containIconos">
@@ -47,7 +49,10 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <a xlink:href="https://api.whatsapp.com/send?phone=56949380469&text=" target="__blank">
+            <a
+              xlink:href="https://api.whatsapp.com/send?phone=56949380469&text="
+              target="__blank"
+            >
               <path
                 d="M42.282 34.7583C41.5552 34.3904 38.0154 32.6631 37.3538 32.4166C36.6922 32.1809 36.2119 32.0577 35.7298 32.7845C35.2586 33.4932 33.8702 35.1154 33.4461 35.5884C33.0219 36.0615 32.6051 36.0978 31.8891 35.7769C31.1623 35.409 28.8405 34.6532 26.0837 32.1809C23.9304 30.2651 22.4967 27.9053 22.0708 27.1784C21.6467 26.4607 22.0237 26.0547 22.3826 25.6958C22.7124 25.3659 23.1094 24.8657 23.4773 24.4307C23.8271 23.9957 23.9395 23.7039 24.1951 23.2326C24.4307 22.7233 24.3092 22.3264 24.1298 21.9675C23.9504 21.6086 22.5058 18.0507 21.9022 16.6333C21.3259 15.2268 20.7223 15.4062 20.2782 15.4062C19.8632 15.3682 19.3811 15.3682 18.9008 15.3682C18.4204 15.3682 17.6356 15.5476 16.9741 16.2364C16.3125 16.9632 14.4438 18.6996 14.4438 22.2122C14.4438 25.7339 17.0303 29.1414 17.3891 29.6507C17.7571 30.1219 22.4768 37.3719 29.7178 40.4876C31.4451 41.2144 32.7863 41.6494 33.8339 42.0083C35.5612 42.5557 37.1381 42.4796 38.3833 42.3001C39.7608 42.0736 42.6499 40.5529 43.2553 38.8546C43.8698 37.1454 43.8698 35.7298 43.6903 35.409C43.5109 35.0791 43.0396 34.8997 42.3128 34.5789L42.282 34.7583ZM29.1504 52.5625H29.1124C24.8258 52.5625 20.5882 51.4007 16.8871 49.2293L16.0189 48.7109L6.95638 51.0708L9.39237 42.253L8.80694 41.3468C6.41347 37.5411 5.14369 33.1368 5.14388 28.6411C5.14388 15.4824 15.9156 4.74875 29.1686 4.74875C35.5884 4.74875 41.6114 7.25 46.1426 11.7812C48.3779 13.99 50.151 16.6217 51.3584 19.5229C52.5658 22.4241 53.1834 25.5368 53.1751 28.6792C53.157 41.8289 42.3944 52.5625 29.1595 52.5625H29.1504ZM49.5882 8.33569C44.0746 3.01056 36.8246 0 29.1124 0C13.2059 0 0.25375 12.8959 0.244688 28.7444C0.244688 33.8049 1.566 38.7422 4.09625 43.1121L0 58L15.312 54.0071C19.5538 56.294 24.2952 57.4969 29.1142 57.5088H29.1233C45.0388 57.5088 57.9909 44.6129 58 28.7535C58 21.0794 55.0076 13.8566 49.5519 8.42813L49.5882 8.33569Z"
                 fill="white"
@@ -133,8 +138,9 @@
 
 @media (max-width: 600px) {
   .footer {
-    background-color: $azul-oscuro;
     width: 100vw;
+    padding: 5% 5% 25% 5%;
+    background-color: $azul-oscuro;
     .container {
       display: flex;
       justify-content: space-between;
@@ -142,22 +148,22 @@
       .direccion {
         width: 80%;
         p {
-          color: white;
           line-height: 24.49px;
+          color: white;
         }
       }
       .iconos {
-        justify-content: center;
         display: flex;
-        width: fit-content;
         flex-direction: column;
         align-items: flex-end;
+        justify-content: center;
+        width: fit-content;
         .containIconos {
           display: flex;
-          justify-content: center;
-          width: fit-content;
           flex-direction: column;
           align-items: flex-end;
+          justify-content: center;
+          width: fit-content;
           svg {
             width: 30px;
             height: auto;
@@ -171,8 +177,8 @@
 
 @media (min-width: 600px) {
   .footer {
-    background-color: $azul-oscuro;
     width: 100vw;
+    background-color: $azul-oscuro;
     .container {
       display: flex;
       justify-content: space-between;
@@ -180,20 +186,20 @@
       .direccion {
         width: 50%;
         p {
-          color: white;
           line-height: 24.49px;
+          color: white;
         }
       }
       .iconos {
-        justify-content: center;
         display: flex;
-        width: 50%;
         flex-direction: column;
+        justify-content: center;
+        width: 50%;
         .containIconos {
           display: flex;
+          align-items: center;
           justify-content: space-evenly;
           width: 100%;
-          align-items: center;
           svg {
             width: 7%;
             height: auto;

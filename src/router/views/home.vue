@@ -2,15 +2,26 @@
 import MobileNavbar from '@/src/components/mobile_navbar.vue'
 import appConfig from '@src/app.config'
 import Layout from '@layouts/main.vue'
+import Footer from '@components/footer.vue'
 import { Carousel, Slide } from 'vue-carousel'
+import store from '@state/store'
 
 export default {
   page: {
     title: 'Home',
     meta: [{ name: 'description', content: appConfig.description }],
   },
-
-  components: { Layout, Carousel, Slide,  MobileNavbar },
+  components: { Layout, Carousel, Slide, MobileNavbar, Footer },
+  data() {
+    return {
+      workshops: [],
+    }
+  },
+  created() {
+    store.dispatch('workshops/fetchWorkshops').then((data) => {
+      this.workshops = data
+    })
+  },
 }
 </script>
 
@@ -21,11 +32,11 @@ export default {
       <div class="item-flex sectionCarrusel">
         <Carousel
           :per-page="1"
-          autoplay="true"
-          autoplayTimeout="3000"
-          speed="700"
-          loop="true"
-          paginationSize="1px"
+          :autoplay="true"
+          :autoplay-timeout="3000"
+          :speed="700"
+          :loop="true"
+          :pagination-size="0"
         >
           <Slide class="carruselSlide">
             <img
@@ -152,33 +163,23 @@ export default {
             <h1 class="title">Esta semana te recomendamos</h1>
           </div>
           <div class="cardContainer">
-            <div class="card item-flex">
-              <img
-                src="../../assets/images/desktop/actividades/yoga_flow.png"
-                alt="yoga"
-              />
-              <p class="normalText"><strong>Yoga Flow</strong></p>
-            </div>
-            <div class="card item-flex">
-              <img
-                src="../../assets/images/desktop/actividades/pilates_suelo.png"
-                alt="Pilates Suelo"
-              />
-              <p class="normalText"><strong>Pilates Suelo</strong></p>
-            </div>
-            <div class="card item-flex">
-              <img
-                src="../../assets/images/desktop/actividades/masaje.png"
-                alt="Masaje Ayurvédico"
-              />
-              <p class="normalText"><strong>Masaje Ayurvédico</strong></p>
-            </div>
-            <div class="card item-flex">
-              <img
-                src="../../assets/images/desktop/actividades/danza.png"
-                alt="Danza africana"
-              />
-              <p class="normalText"><strong>Danza africana</strong></p>
+            <div
+              v-for="workshop in workshops"
+              :key="workshop._id"
+              class="card item-flex"
+            >
+              <router-link
+                :to="{
+                  path: '/actividades',
+                  query: { workshopId: workshop._id },
+                }"
+                class="card-link"
+              >
+                <img :src="workshop.pictureMobile" alt="yoga" />
+                <p class="normalText"
+                  ><strong>{{ workshop.name }}</strong></p
+                >
+              </router-link>
             </div>
           </div>
         </div>
@@ -321,6 +322,7 @@ export default {
         ></iframe>
       </div>
     </div>
+    <Footer />
   </Layout>
 </template>
 
@@ -342,8 +344,8 @@ export default {
         img {
           width: 100vw;
           padding: 18px;
-          border-radius: 6px;
-          border: 1px solid #ffffff;
+          border: 1px solid #fff;
+          border-radius: 10px;
         }
       }
     }
@@ -399,7 +401,7 @@ export default {
             border-radius: 6px;
             p {
               line-height: 19.2px;
-              color: white;
+              color: white !important;
             }
             svg {
               width: 10%;
@@ -455,7 +457,7 @@ export default {
         margin-top: 5%;
         background-color: $verde-oscuro;
         .title {
-          color: white;
+          color: white !important;
         }
         .container {
           width: 80%;
@@ -560,7 +562,7 @@ export default {
       @include bloqueInfo;
 
       &.sectionAboutUs {
-      margin-top: 0%;
+        margin-top: 0%;
         .about {
           display: inline-flex;
           justify-content: center;
@@ -610,7 +612,7 @@ export default {
             border-radius: 6px;
             p {
               line-height: 24px;
-              color: white;
+              color: white !important;
             }
             &.actividades {
               background-color: $rosado-original;
@@ -776,6 +778,8 @@ export default {
 }
 .title {
   @include title;
+
+  color: $rosado-oscuro !important;
 }
 .normalText {
   @include normalText;

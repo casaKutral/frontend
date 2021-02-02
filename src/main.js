@@ -1,6 +1,5 @@
 import Vue from 'vue'
-import VueCarousel from 'vue-carousel';
-Vue.use(VueCarousel);
+import VueCarousel from 'vue-carousel'
 import router from '@router'
 import store from '@state/store'
 import {
@@ -11,6 +10,7 @@ import {
   MdDialog,
   MdDatepicker,
   MdCheckbox,
+  MdProgress,
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -80,7 +80,8 @@ Vue.use(MdCard)
 Vue.use(MdDialog)
 Vue.use(MdDatepicker)
 Vue.use(MdCheckbox)
-
+Vue.use(VueCarousel)
+Vue.use(MdProgress)
 Vue.material.locale.dateFormat = 'dd/MM/yyyy'
 Vue.material.locale.days = [
   'Domingo',
@@ -102,6 +103,20 @@ Vue.material.locale.shortDays = [
   'Juev',
   'Vier',
   'Sa',
+]
+Vue.material.locale.shortMonths = [
+  'En',
+  'Feb',
+  'Mar',
+  'Ab',
+  'Mayo',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dic',
 ]
 Vue.material.locale.shorterDays = ['D', 'L', 'M', 'MI', 'J', 'V', 'S']
 Vue.material.locale.months = [

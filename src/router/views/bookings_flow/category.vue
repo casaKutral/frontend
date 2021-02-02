@@ -30,7 +30,11 @@ export default {
     }
   },
   created: function() {
-    this.showCategory = true
+    if (this.$route.query.workshopId) {
+      this.showCategory = false
+    } else {
+      this.showCategory = true
+    }
   },
   methods: {
     activeList(list) {
@@ -38,7 +42,11 @@ export default {
       this.selectedCategory = list
     },
     backFromList() {
-      this.showCategory = true
+      if (this.$route.query.workshopId) {
+        this.$router.push('/')
+      } else {
+        this.showCategory = true
+      }
     },
     chargeImg(id) {
       switch (id) {
@@ -72,7 +80,10 @@ export default {
 
 <template>
   <div>
-    <div v-if="showCategory === true && workshopsCategorys.length > 0">
+    <div
+      v-if="showCategory === true && workshopsCategorys.length > 0"
+      id="categoryMobile"
+    >
       <MobileNavbar
         :show-back-button="true"
         @back="$router.push({ path: '/' })"
@@ -118,92 +129,94 @@ export default {
 <style lang="scss">
 @import '@design';
 
-.cardContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: space-around;
-  height: 75vh;
-}
-.titleWrapper {
-  @include titleWrapper;
-}
-.title {
-  @include title;
-}
-.cardClickWrapper {
-  display: contents;
-}
-.md-card {
-  display: inline-block;
-  width: 45% !important;
-  height: 25%;
-  margin-top: 10%;
-  border-radius: 12px;
-  @include card-shadow;
-}
+#categoryMobile {
+  .cardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-around;
+    height: 75vh;
+  }
+  .titleWrapper {
+    @include titleWrapper;
+  }
+  .title {
+    @include title;
+  }
+  .cardClickWrapper {
+    display: contents;
+  }
+  .md-card {
+    display: inline-block;
+    width: 45% !important;
+    height: 25%;
+    margin-top: 10%;
+    border-radius: 12px;
+    @include card-shadow;
+  }
 
-.category {
-  @include title;
+  .category {
+    @include title;
 
-  color: white !important;
-  text-shadow: 2px 2px 2px #000;
-  text-transform: uppercase;
-}
-.mediaCover {
-  @include mediaCover;
+    color: white !important;
+    text-shadow: 2px 2px 2px #000;
+    text-transform: uppercase;
+  }
+  .mediaCover {
+    @include mediaCover;
 
-  // background-image: url(../../../assets/images/yoga_ejemplo.jpg);
-}
-.md-card-media {
-  height: 100%;
-  border-radius: 12px;
-}
-.md-card-media img {
-  top: 25% !important;
-}
-.md-card-media-cover .md-card-area {
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-.md-card-media-cover.md-text-scrim .md-card-backdrop {
-  top: 20%;
-  height: 80%;
-  background: rgba(255, 255, 255, 0);
-  background: -moz-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-  background: -webkit-gradient(
-    left top,
-    left bottom,
-    color-stop(0%, rgba(255, 255, 255, 0)),
-    color-stop(100%, rgba(0, 0, 0, 0.6))
-  );
-  background: -webkit-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-  background: -o-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-  background: -ms-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-  border-radius: 12px;
+    // background-image: url(../../../assets/images/yoga_ejemplo.jpg);
+  }
+  .md-card-media {
+    height: 100%;
+    border-radius: 12px;
+  }
+  .md-card-media img {
+    top: 25% !important;
+  }
+  .md-card-media-cover .md-card-area {
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .md-card-media-cover.md-text-scrim .md-card-backdrop {
+    top: 20%;
+    height: 80%;
+    background: rgba(255, 255, 255, 0);
+    background: -moz-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      left bottom,
+      color-stop(0%, rgba(255, 255, 255, 0)),
+      color-stop(100%, rgba(0, 0, 0, 0.6))
+    );
+    background: -webkit-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    background: -o-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    background: -ms-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    border-radius: 12px;
+  }
 }
 </style>

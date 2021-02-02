@@ -5,6 +5,7 @@ export const state = {
   teachers: [],
   hours: [],
   booking: [],
+  workshopWithID: {},
 }
 
 export const getters = {}
@@ -12,6 +13,9 @@ export const getters = {}
 export const mutations = {
   CACHE_WORKSHOPS(state, newWorkshops) {
     state.workshops = newWorkshops
+  },
+  CACHE_WORKSHOPSWID(state, choseWorkshop) {
+    state.workshopWithID = choseWorkshop
   },
   CACHE_TEACHERS(state, newTeachers) {
     state.teachers = newTeachers
@@ -25,14 +29,24 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchWorkshops({ commit }) {
-    return axios
-      .get(`https://backend.casakutral.vercel.app/api/workshops`)
-      .then((response) => {
-        const workshops = response.data
-        commit('CACHE_WORKSHOPS', workshops)
-        return workshops
-      })
+  fetchWorkshops({ commit }, payload) {
+    if (payload) {
+      return axios
+        .get(`https://backend.casakutral.vercel.app/api/workshops/${payload}`)
+        .then((response) => {
+          const workshop = response.data
+          commit('CACHE_WORKSHOPSWID', workshop)
+          return workshop
+        })
+    } else {
+      return axios
+        .get(`https://backend.casakutral.vercel.app/api/workshops`)
+        .then((response) => {
+          const workshops = response.data
+          commit('CACHE_WORKSHOPS', workshops)
+          return workshops
+        })
+    }
   },
   fetchTeachers({ commit }) {
     return axios

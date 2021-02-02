@@ -1,5 +1,6 @@
 <script>
 import MobileNavbar from '@/src/components/mobile_navbar.vue'
+import store from '@state/store'
 import WorkshopDetail from './workshopDetail.vue'
 
 export default {
@@ -20,16 +21,32 @@ export default {
         type: Object,
         default: null,
       },
+      loading: false,
     }
   },
-  created: function() {},
+  created: function() {
+    if (this.$route.query.workshopId) {
+      this.loading = true
+      store
+        .dispatch('workshops/fetchWorkshops', this.$route.query.workshopId)
+        .then((workshop) => {
+          this.selectedWorkshop = workshop
+          this.loading = false
+          this.showList = false
+        })
+    }
+  },
   methods: {
     activeDetail(workshop) {
       this.showList = false
       this.selectedWorkshop = workshop
     },
     backFromDetail() {
-      this.showList = true
+      if (this.$route.query.workshopId) {
+        this.$router.push('/')
+      } else {
+        this.showList = true
+      }
     },
   },
 }
@@ -37,7 +54,16 @@ export default {
 
 <template>
   <div>
-    <div v-if="showList && workshopsList !== null">
+    <md-progress-spinner
+      v-if="loading"
+      :md-diameter="50"
+      :md-stroke="10"
+      md-mode="indeterminate"
+    ></md-progress-spinner>
+    <div
+      v-if="showList && workshopsList !== null && !loading"
+      id="workshopList"
+    >
       <MobileNavbar :show-back-button="true" @back="$emit('back')" />
       <div class="header">
         <div class="titleWrapperList">
@@ -52,7 +78,7 @@ export default {
         @click="activeDetail(workshop)"
       >
         <div class="workshopImgCol">
-          <img class="workshopImg" :src="workshop.picture" />
+          <img class="workshopImg" :src="workshop.pictureMobile" />
         </div>
         <div class="workshopInfoWrapper">
           <p class="md-subheading w-cost">${{ workshop.cost }}</p>
@@ -60,7 +86,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="!loading">
       <WorkshopDetail :workshop="selectedWorkshop" @back="backFromDetail" />
     </div>
   </div>
@@ -68,6 +94,11 @@ export default {
 
 <style lang="scss">
 @import '@design';
+#workshopList {
+  .title {
+    @include title;
+  }
+}
 .backButton {
   width: 100%;
 }
@@ -97,8 +128,6 @@ p {
 
 .titleWrapperList {
   @include titleWrapper;
-
-  width: 60% !important;
 }
 
 .workshopRow {

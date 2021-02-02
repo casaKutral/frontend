@@ -44,6 +44,7 @@ export default {
       email: '',
       phone: '',
       savedUser: {},
+      loading: false,
     }
   },
   created() {
@@ -65,34 +66,34 @@ export default {
         this.showConfirmData = false
         this.showUserDataForm = true
         setTimeout(() => {
-          const nameInput = document.getElementById('userFormName')
-          const emailInput = document.getElementById('userFormEmail')
-          const phoneInput = document.getElementById('userFormPhone')
-          phoneInput.addEventListener('keyup', () => {
-            if (
-              nameInput.value !== '' &&
-              phoneInput.value !== '' &&
-              this.ValidateEmail(emailInput.value) === true
-            ) {
-              this.validForm = true
-            } else if (this.ValidateEmail(emailInput.value) === false) {
-              this.showMailWarning = true
-              this.validForm = false
-              emailInput.addEventListener('keyup', () => {
-                if (this.ValidateEmail(emailInput.value) === true) {
-                  this.showMailWarning = false
-                }
-              })
-            } else {
-              this.validForm = false
-            }
-            if (
-              phoneInput.value !== '' &&
-              this.ValidateEmail(emailInput.value) === true
-            ) {
-              this.validForm = true
-            }
-          })
+          // const nameInput = document.getElementById('userFormName')
+          // const emailInput = document.getElementById('userFormEmail')
+          // const phoneInput = document.getElementById('userFormPhone')
+          // phoneInput.addEventListener('keyup', () => {
+          //   if (
+          //     nameInput.value !== '' &&
+          //     phoneInput.value !== '' &&
+          //     this.ValidateEmail(emailInput.value) === true
+          //   ) {
+          //     this.validForm = true
+          //   } else if (this.ValidateEmail(emailInput.value) === false) {
+          //     this.showMailWarning = true
+          //     this.validForm = false
+          //     emailInput.addEventListener('keyup', () => {
+          //       if (this.ValidateEmail(emailInput.value) === true) {
+          //         this.showMailWarning = false
+          //       }
+          //     })
+          //   } else {
+          //     this.validForm = false
+          //   }
+          //   if (
+          //     phoneInput.value !== '' &&
+          //     this.ValidateEmail(emailInput.value) === true
+          //   ) {
+          //     this.validForm = true
+          //   }
+          // })
         }, 2000)
       }
     },
@@ -117,8 +118,10 @@ export default {
       this.showTermsDetail = false
     },
     goToConfirmMail() {
-      this.showUserDataForm = false
-      this.showMailConfirm = true
+      if (this.validForm === true) {
+        this.showUserDataForm = false
+        this.showMailConfirm = true
+      }
     },
     backFromConfirmMail() {
       this.showUserDataForm = true
@@ -164,6 +167,7 @@ export default {
       })
     },
     sendBooking(booking, action, newUser) {
+      this.loading = true
       store.dispatch('workshops/postBooking', booking).then((response) => {
         this.showMailConfirm = false
         if (response.status >= 200 && response.status <= 300) {
@@ -182,7 +186,7 @@ export default {
           } else if (action === 'noAddUser') {
             // no hacer nada con el usuario
           }
-          // store.dispatch('workshops/updateHours', booking)
+          this.loading = false
         } else {
           this.showError = true
           this.failCode = response.status
@@ -377,7 +381,16 @@ export default {
             y con el podrás validarla.
           </p>
         </div>
-        <md-dialog-actions>
+        <span v-if="loading">
+          <md-progress-spinner
+            :md-diameter="50"
+            :md-stroke="5"
+            md-mode="indeterminate"
+            style=" margin-bottom: 20%;margin-left: 43%;"
+          ></md-progress-spinner>
+        </span>
+        <md-dialog-actions v-if="!loading">
+          <!-- md-mode="indeterminate" -->
           <md-button class="primary" @click="starBookingProcess"
             >Sí, confirmo</md-button
           >

@@ -23,6 +23,7 @@ export default {
         },
       },
       loading: false,
+      comeFromHome: false,
     }
   },
   computed: {
@@ -38,11 +39,15 @@ export default {
   },
   created: function() {
     this.loading = true
-    store.dispatch('workshops/fetchWorkshops').then((data) => {
-      this.extractCategorys(data)
-      // console.log(data)
+    if (this.$route.query.workshopId) {
       this.loading = false
-    })
+      this.workshopsCategorys = []
+    } else {
+      store.dispatch('workshops/fetchWorkshops', null).then((data) => {
+        this.extractCategorys(data)
+        this.loading = false
+      })
+    }
     store.dispatch('workshops/fetchTeachers')
   },
   methods: {
@@ -100,11 +105,33 @@ export default {
 
 <template>
   <Layout>
-    <div v-if="loading">
-      <p>Loading</p>
+    <div v-if="loading" class="loadingMobile">
+      <md-progress-spinner
+        :md-diameter="50"
+        :md-stroke="10"
+        md-mode="indeterminate"
+      ></md-progress-spinner>
     </div>
     <div v-else>
       <Category :workshops-categorys="workshopsCategorys" />
     </div>
   </Layout>
 </template>
+
+<style lang="scss">
+@import '@design';
+.loadingMobile {
+  display: flex;
+  justify-content: center;
+  height: 40vh;
+  padding-top: 80%;
+  margin: auto;
+
+  .md-progress-spinner-draw {
+    display: flex;
+    align-self: center;
+    width: 250px;
+    height: 250px;
+  }
+}
+</style>

@@ -7,7 +7,7 @@ export default {
     },
   },
   created() {
-    console.log(this.showBackButton)
+    // console.log(this.showBackButton)
   },
   methods: {
     back() {
@@ -26,18 +26,14 @@ export default {
       @click="back"
     />
 
-    <h1>CASA KUTRAL</h1>
+    <h1 :class="showBackButton ? 'align' : 'alignExtra'">CASA KUTRAL</h1>
 
     <a
       class="whatsappBtn"
       target="blank"
       href="https://api.whatsapp.com/send?phone=+56948628194"
     >
-      <font-awesome-icon
-        class="whatsappIcon"
-        :icon="['fab', 'whatsapp']"
-        @click="back"
-      />
+      <font-awesome-icon class="whatsappIcon" :icon="['fab', 'whatsapp']" />
     </a>
   </div>
 </template>
@@ -58,8 +54,16 @@ export default {
     background-color: white;
 
     h1 {
-      font-size: 24px;
+      @include logoTitle;
+
       color: $azul-original;
+      &.align {
+        padding-left: 4%;
+      }
+      &.alignExtra {
+        position: relative;
+        left: 30%;
+      }
     }
 
     .chevron-left {

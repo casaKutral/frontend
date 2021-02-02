@@ -55,7 +55,7 @@ export default {
 
 @media (max-width: 600px) {
   .bottomNav {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     z-index: 3;
     display: flex;
