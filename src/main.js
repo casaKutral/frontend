@@ -11,6 +11,7 @@ import {
   MdDatepicker,
   MdCheckbox,
   MdProgress,
+  MdTable,
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -25,7 +26,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import App from './app.vue'
 // Globally register all `_base`-prefixed components
 import '@components/_globals'
-
+Vue.use(VueCarousel)
 library.add(faArrowAltCircleLeft)
 library.add(faClock)
 library.add(faPlusCircle)
@@ -82,6 +83,8 @@ Vue.use(MdDatepicker)
 Vue.use(MdCheckbox)
 Vue.use(VueCarousel)
 Vue.use(MdProgress)
+Vue.use(MdTable)
+
 Vue.material.locale.dateFormat = 'dd/MM/yyyy'
 Vue.material.locale.days = [
   'Domingo',
