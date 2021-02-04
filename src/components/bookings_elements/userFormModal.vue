@@ -66,34 +66,34 @@ export default {
         this.showConfirmData = false
         this.showUserDataForm = true
         setTimeout(() => {
-          // const nameInput = document.getElementById('userFormName')
-          // const emailInput = document.getElementById('userFormEmail')
-          // const phoneInput = document.getElementById('userFormPhone')
-          // phoneInput.addEventListener('keyup', () => {
-          //   if (
-          //     nameInput.value !== '' &&
-          //     phoneInput.value !== '' &&
-          //     this.ValidateEmail(emailInput.value) === true
-          //   ) {
-          //     this.validForm = true
-          //   } else if (this.ValidateEmail(emailInput.value) === false) {
-          //     this.showMailWarning = true
-          //     this.validForm = false
-          //     emailInput.addEventListener('keyup', () => {
-          //       if (this.ValidateEmail(emailInput.value) === true) {
-          //         this.showMailWarning = false
-          //       }
-          //     })
-          //   } else {
-          //     this.validForm = false
-          //   }
-          //   if (
-          //     phoneInput.value !== '' &&
-          //     this.ValidateEmail(emailInput.value) === true
-          //   ) {
-          //     this.validForm = true
-          //   }
-          // })
+          const nameInput = document.getElementById('userFormName')
+          const emailInput = document.getElementById('userFormEmail')
+          const phoneInput = document.getElementById('userFormPhone')
+          phoneInput.addEventListener('keyup', () => {
+            if (
+              nameInput.value !== '' &&
+              phoneInput.value !== '' &&
+              this.ValidateEmail(emailInput.value) === true
+            ) {
+              this.validForm = true
+            } else if (this.ValidateEmail(emailInput.value) === false) {
+              this.showMailWarning = true
+              this.validForm = false
+              emailInput.addEventListener('keyup', () => {
+                if (this.ValidateEmail(emailInput.value) === true) {
+                  this.showMailWarning = false
+                }
+              })
+            } else {
+              this.validForm = false
+            }
+            if (
+              phoneInput.value !== '' &&
+              this.ValidateEmail(emailInput.value) === true
+            ) {
+              this.validForm = true
+            }
+          })
         }, 2000)
       }
     },
@@ -136,9 +136,10 @@ export default {
           // workshopsBooked_ids: Array
         }
         const booking = {
+          shortID: '',
           dates: this.value,
           cost: this.totalValue,
-          status: 'pending',
+          status: 'Pendiente',
           workshop_id: this.workshopId,
           workshop_name: this.workshopName,
           teacher_name: this.teacherName,

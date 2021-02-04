@@ -1,3 +1,41 @@
+<script>
+// import store from '@state/store'
+
+export default {
+  props: {
+    bookings: {
+      type: Array,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      // selectedBookings: [],
+      selects: [],
+      showTable: false,
+      loading: false,
+    }
+  },
+  created() {
+    this.loading = true
+    // this.bookings = store.state.bookings.bookings
+    if (this.bookings.length > 0) {
+      // console.log(this.bookings)
+      this.showTable = true
+      this.loading = false
+      this.bookings.map((booking) => {
+        this.selects.push(false)
+      })
+    }
+  },
+  methods: {
+    selectBooking(_id, index) {
+      this.$emit('select-booking', _id)
+    },
+  },
+}
+</script>
+
 <template>
   <div class="table">
     <table class="table-primary">
@@ -10,16 +48,34 @@
           <th class="title">Detalles</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td><md-checkbox v-model="array" value="1"></md-checkbox></td>
-          <td>156497854315468</td>
-          <td>Lupi.nevada@gmail.com</td>
-          <td>Pendiente</td>
+      <tbody v-if="showTable && bookings !== null">
+        <!-- repetir -->
+        <tr v-for="(booking, index) in bookings" :key="booking._id">
+          <td>
+            <md-checkbox
+              v-model="selects[index]"
+              class="md-primary"
+              @change="selectBooking(booking._id, index)"
+            >
+            </md-checkbox>
+          </td>
+          <td :class="booking.status === 'Pendiente' ? 'gray' : 'green'">{{
+            booking.shortID
+          }}</td>
+          <td>{{ booking.user_email }} </td>
+          <td
+            class="status"
+            :style="
+              booking.status === 'Pendiente'
+                ? 'color:  #ccc;'
+                : 'color:  $verde-original;'
+            "
+            >{{ booking.status }}</td
+          >
           <td
             ><svg
               width="30"
-              height="40"
+              height="30"
               viewBox="0 0 38 51"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -31,66 +87,7 @@
             </svg>
           </td>
         </tr>
-        <tr>
-          <td><md-checkbox v-model="array" value="2"></md-checkbox></td>
-          <td>156497854315468</td>
-          <td>Lupi.nevada@gmail.com</td>
-          <td>Pendiente</td>
-          <td
-            ><svg
-              width="30"
-              height="40"
-              viewBox="0 0 38 51"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22.1667 13.5469V0H2.375C1.05885 0 0 1.06582 0 2.39062V48.6094C0 49.9342 1.05885 51 2.375 51H35.625C36.9411 51 38 49.9342 38 48.6094V15.9375H24.5417C23.2354 15.9375 22.1667 14.8617 22.1667 13.5469ZM28.5 37.0547C28.5 37.7121 27.9656 38.25 27.3125 38.25H10.6875C10.0344 38.25 9.5 37.7121 9.5 37.0547V36.2578C9.5 35.6004 10.0344 35.0625 10.6875 35.0625H27.3125C27.9656 35.0625 28.5 35.6004 28.5 36.2578V37.0547ZM28.5 30.6797C28.5 31.3371 27.9656 31.875 27.3125 31.875H10.6875C10.0344 31.875 9.5 31.3371 9.5 30.6797V29.8828C9.5 29.2254 10.0344 28.6875 10.6875 28.6875H27.3125C27.9656 28.6875 28.5 29.2254 28.5 29.8828V30.6797ZM28.5 23.5078V24.3047C28.5 24.9621 27.9656 25.5 27.3125 25.5H10.6875C10.0344 25.5 9.5 24.9621 9.5 24.3047V23.5078C9.5 22.8504 10.0344 22.3125 10.6875 22.3125H27.3125C27.9656 22.3125 28.5 22.8504 28.5 23.5078ZM38 12.1424V12.75H25.3333V0H25.937C26.5703 0 27.174 0.249023 27.6193 0.697266L37.3073 10.459C37.7526 10.9072 38 11.5148 38 12.1424Z"
-                fill="#5177CA"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td><md-checkbox v-model="array" value="3"></md-checkbox></td>
-          <td>156497854315468</td>
-          <td>Lupi.nevada@gmail.com</td>
-          <td class="pay">Pagado</td>
-          <td
-            ><svg
-              width="30"
-              height="40"
-              viewBox="0 0 38 51"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22.1667 13.5469V0H2.375C1.05885 0 0 1.06582 0 2.39062V48.6094C0 49.9342 1.05885 51 2.375 51H35.625C36.9411 51 38 49.9342 38 48.6094V15.9375H24.5417C23.2354 15.9375 22.1667 14.8617 22.1667 13.5469ZM28.5 37.0547C28.5 37.7121 27.9656 38.25 27.3125 38.25H10.6875C10.0344 38.25 9.5 37.7121 9.5 37.0547V36.2578C9.5 35.6004 10.0344 35.0625 10.6875 35.0625H27.3125C27.9656 35.0625 28.5 35.6004 28.5 36.2578V37.0547ZM28.5 30.6797C28.5 31.3371 27.9656 31.875 27.3125 31.875H10.6875C10.0344 31.875 9.5 31.3371 9.5 30.6797V29.8828C9.5 29.2254 10.0344 28.6875 10.6875 28.6875H27.3125C27.9656 28.6875 28.5 29.2254 28.5 29.8828V30.6797ZM28.5 23.5078V24.3047C28.5 24.9621 27.9656 25.5 27.3125 25.5H10.6875C10.0344 25.5 9.5 24.9621 9.5 24.3047V23.5078C9.5 22.8504 10.0344 22.3125 10.6875 22.3125H27.3125C27.9656 22.3125 28.5 22.8504 28.5 23.5078ZM38 12.1424V12.75H25.3333V0H25.937C26.5703 0 27.174 0.249023 27.6193 0.697266L37.3073 10.459C37.7526 10.9072 38 11.5148 38 12.1424Z"
-                fill="#5177CA"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td><md-checkbox v-model="array" value="4"></md-checkbox></td>
-          <td>156497854315468</td>
-          <td>Lupi.nevada@gmail.com</td>
-          <td>Pendiente</td>
-          <td
-            ><svg
-              width="30"
-              height="40"
-              viewBox="0 0 38 51"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22.1667 13.5469V0H2.375C1.05885 0 0 1.06582 0 2.39062V48.6094C0 49.9342 1.05885 51 2.375 51H35.625C36.9411 51 38 49.9342 38 48.6094V15.9375H24.5417C23.2354 15.9375 22.1667 14.8617 22.1667 13.5469ZM28.5 37.0547C28.5 37.7121 27.9656 38.25 27.3125 38.25H10.6875C10.0344 38.25 9.5 37.7121 9.5 37.0547V36.2578C9.5 35.6004 10.0344 35.0625 10.6875 35.0625H27.3125C27.9656 35.0625 28.5 35.6004 28.5 36.2578V37.0547ZM28.5 30.6797C28.5 31.3371 27.9656 31.875 27.3125 31.875H10.6875C10.0344 31.875 9.5 31.3371 9.5 30.6797V29.8828C9.5 29.2254 10.0344 28.6875 10.6875 28.6875H27.3125C27.9656 28.6875 28.5 29.2254 28.5 29.8828V30.6797ZM28.5 23.5078V24.3047C28.5 24.9621 27.9656 25.5 27.3125 25.5H10.6875C10.0344 25.5 9.5 24.9621 9.5 24.3047V23.5078C9.5 22.8504 10.0344 22.3125 10.6875 22.3125H27.3125C27.9656 22.3125 28.5 22.8504 28.5 23.5078ZM38 12.1424V12.75H25.3333V0H25.937C26.5703 0 27.174 0.249023 27.6193 0.697266L37.3073 10.459C37.7526 10.9072 38 11.5148 38 12.1424Z"
-                fill="#5177CA"
-              />
-            </svg>
-          </td>
-        </tr>
+        <!-- fin -->
       </tbody>
     </table>
   </div>
@@ -103,14 +100,14 @@
   width: 100%;
   .table-primary {
     width: 100%;
-    text-align: center;
     margin-top: 5%;
+    text-align: center;
     thead {
       &:first-child {
         color: #f2f5f9;
       }
       th {
-        margin: 2px 0px 5px 0px;
+        margin: 2px 0 5px 0;
       }
     }
     tbody {
@@ -123,30 +120,49 @@
         background-color: #f2f5f9;
         td {
           &:first-child {
-            background-color: #f2f5f9;
-            width: auto;
             display: block;
+            width: auto;
+            background-color: #f2f5f9;
           }
           &:nth-child(2) {
-            border-left: 5px solid #CCCCCC;
+            border-left: 5px solid #ccc;
           }
+          &.gray {
+            border-left: 5px solid #ccc;
+          }
+          &.green {
+            border-left: 5px solid $verde-original;
+          }
+          &.status {
+            font-family: 'Chilena-Bold';
+            font-size: 20px;
+            font-style: normal;
+            font-weight: bold;
+          }
+
           background-color: white;
           .md-checkbox {
-            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 4px;
-            background-color: white;
             margin: 0;
             margin-top: 11px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
             .md-checkbox-container {
-              border-color: transparent;
               width: 30px;
               height: 30px;
               margin: 0;
+              border-color: transparent;
             }
           }
           svg {
           }
         }
+      }
+      .md-checkbox .md-checkbox-container::after,
+      .md-checkbox .md-checkbox-container::before {
+        padding-top: 20px;
+        padding-left: 5px;
+        margin-left: 5px;
       }
     }
   }

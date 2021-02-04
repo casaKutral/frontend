@@ -27,11 +27,11 @@ export default {
       loggedInNavRoutes: [
         {
           name: 'admin',
-          title: () => 'Logged in as ' + this.currentUser.name,
+          title: 'admin',
         },
         {
           name: 'logout',
-          title: 'Log out',
+          title: 'cerrar sesión',
         },
       ],
       loggedOutNavRoutes: [

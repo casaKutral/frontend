@@ -1,7 +1,23 @@
+<script>
+export default {
+  props: {},
+  data() {
+    return {
+      searchValue: '',
+    }
+  },
+  methods: {
+    emitSearch() {
+      this.$emit('search', this.searchValue)
+    },
+  },
+}
+</script>
+
 <template>
   <div class="campo">
-    <input v-model="codigo" class="input" />
-    <button type="button">
+    <input v-model="searchValue" class="input" />
+    <button type="button" @click="emitSearch">
       <svg
         width="38"
         height="38"
@@ -23,31 +39,31 @@
 
 @media (min-width: 600px) {
   .campo {
+    position: relative;
+    width: fit-content;
+    height: 42px;
     background-color: white;
     border-radius: 8px;
     box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 42px;
-    width: fit-content;
-    position: relative;
     input {
-      border: none;
-      border-radius: 4px;
       width: 100%;
       height: 100%;
-      background-color: transparent;
       padding: 0 15px;
+      background-color: transparent;
+      border: none;
+      border-radius: 4px;
       &:focus {
         outline: none;
       }
     }
     button {
       position: absolute;
+      top: 3px;
       right: -3px;
       width: 12%;
-      top: 3px;
+      cursor: pointer;
       background: transparent;
       border: none;
-      cursor: pointer;
       svg {
         width: 50%;
       }

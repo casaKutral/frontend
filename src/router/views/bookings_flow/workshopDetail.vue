@@ -51,8 +51,10 @@ export default {
           return teacher
         }
       })
-      this.loading = false
-      this.showTeachersInfo = true
+      if (this.teacherData) {
+        this.loading = false
+        this.showTeachersInfo = true
+      }
     },
     activeConfirm() {
       this.showDetail = false
@@ -93,7 +95,7 @@ export default {
         v-if="showTeachersInfo"
         class="detailImg"
         :style="{
-          backgroundImage: `url(${workshop.pictureDesktop})`,
+          backgroundImage: `url(${workshop.pictureBanner})`,
         }"
       >
       </div>
@@ -120,11 +122,12 @@ export default {
           class="workshopTitle teacherWrapper"
         >
           <img
+            v-if="showTeachersInfo === true"
             :src="teacherData.profile_picture"
             alt="imagen noticia"
             class="teacherProfile"
           />
-          <div style="display: inline-grid;">
+          <div v-if="showTeachersInfo === true" style="display: inline-grid;">
             <p class="md-title teacherName">{{ teacherData.name }}</p>
             <p class="md-subheading teacherSub">{{ teacherData.subtitle }}</p>
           </div>

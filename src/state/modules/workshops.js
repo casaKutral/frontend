@@ -68,7 +68,7 @@ export const actions = {
   },
   postBooking({ commit }, payload) {
     return axios
-      .post('https://backend.casakutral.vercel.app/api/bookings', payload)
+      .post('http://localhost:3000/api/bookings', payload)
       .then((response) => {
         const booking = response
         commit('CACHE_BOOKING', booking)

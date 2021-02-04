@@ -664,7 +664,7 @@ export default {
         margin-top: 5%;
         background-color: $verde-oscuro;
         .title {
-          color: white;
+          color: white !important;
         }
         .container {
           width: 80%;
