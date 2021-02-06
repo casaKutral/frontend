@@ -1,9 +1,10 @@
 <script>
 import MobileNavbar from '@/src/components/mobile_navbar.vue'
+import Footer from '@components/footer.vue'
 import WorkshopList from './workshopList.vue'
 
 export default {
-  components: { WorkshopList, MobileNavbar },
+  components: { WorkshopList, MobileNavbar, Footer },
   props: {
     workshopsCategorys: {
       type: Array,
@@ -123,10 +124,13 @@ export default {
     <div v-else>
       <WorkshopList :workshops-list="selectedCategory" @back="backFromList" />
     </div>
+    <span id="footer">
+      <Footer />
+    </span>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 
 #categoryMobile {
@@ -149,9 +153,6 @@ export default {
   }
   .md-card {
     display: inline-block;
-    width: 45% !important;
-    height: 25%;
-    margin-top: 10%;
     border-radius: 12px;
     @include card-shadow;
   }
@@ -217,6 +218,45 @@ export default {
       rgba(0, 0, 0, 0.6) 100%
     );
     border-radius: 12px;
+  }
+  @media (max-width: 700px) {
+    .md-card {
+      display: inline-block;
+      width: 45% !important;
+      height: 25%;
+      margin-top: 10%;
+    }
+    .title {
+      @include title;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .cardContainer {
+      height: 70vh;
+    }
+    .md-card {
+      display: inline-block;
+      width: 20% !important;
+      height: 45%;
+      margin-top: 4%;
+    }
+    .title {
+      margin-top: 55px !important;
+      font-family: 'Averta';
+      font-size: 48px !important;
+    }
+  }
+}
+@media (max-width: 700px) {
+  #footer {
+    display: none !important;
+  }
+}
+
+@media (min-width: 990px) {
+  #footer {
+    display: block;
   }
 }
 </style>

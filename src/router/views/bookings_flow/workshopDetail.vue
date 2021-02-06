@@ -88,19 +88,29 @@ export default {
 
 <template>
   <div>
-    <div v-if="showDetail && workshop !== null">
+    <div v-if="showDetail && workshop !== null" id="workshopDetail">
       <MobileNavbar :show-back-button="true" @back="$emit('back')" />
       <!-- img del taller -->
       <div
         v-if="showTeachersInfo"
+        id="bannerMobile"
         class="detailImg"
         :style="{
           backgroundImage: `url(${workshop.pictureBanner})`,
         }"
       >
       </div>
+      <div
+        v-if="showTeachersInfo"
+        id="bannerDesktop"
+        class="detailImg"
+        :style="{
+          backgroundImage: `url(${workshop.pictureBannerDesktop})`,
+        }"
+      >
+      </div>
       <!-- info del taller -->
-      <div class="infoContainer">
+      <div id="infoMobile" class="infoContainer">
         <div class="workshopTitle">
           <p class="md-title w-name">{{ workshop.name }}</p>
           <div class="md-subheading w-type">
@@ -136,6 +146,42 @@ export default {
           <p class="md-body-1 regularTxt">{{ teacherData.biography }}</p>
         </div>
       </div>
+      <div id="infoDesktop">
+        <div class="col-6 workshopInfo">
+          <div class="workshopTitle">
+            <p class="md-title w-name">{{ workshop.name }}</p>
+            <div class="md-subheading w-type">
+              <span class="type">{{ workshop.type }}</span>
+            </div>
+          </div>
+          <p class="md-body-1 regularTxt">{{ workshop.description }}</p>
+        </div>
+        <div class="col-6">
+          <div
+            v-if="showTeachersInfo === true"
+            class="workshopTitle teacherWrapper"
+          >
+            <img
+              v-if="showTeachersInfo === true"
+              :src="teacherData.profile_picture"
+              alt="imagen noticia"
+              class="teacherProfile"
+            />
+            <div v-if="showTeachersInfo === true" style="display: inline-grid;">
+              <p class="md-title teacherName">{{ teacherData.name }}</p>
+              <p class="md-subheading teacherSub">{{ teacherData.subtitle }}</p>
+            </div>
+          </div>
+          <div v-if="showTeachersInfo === true" class="teacherBio">
+            <p class="md-body-1 regularTxt">{{ teacherData.biography }}</p>
+          </div>
+        </div>
+        <div class="buttonRow">
+          <button class="primary" @click="activeConfirm">
+            Reservar
+          </button>
+        </div>
+      </div>
     </div>
     <div v-else-if="!showDetail">
       <WorkshopBooking
@@ -148,8 +194,95 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
+
+#workshopDetail {
+  @media (max-width: 700px) {
+    .title {
+      @include title;
+    }
+    #infoMobile {
+      display: block;
+    }
+    #infoDesktop {
+      display: none;
+    }
+    #bannerMobile {
+      display: block;
+    }
+    #bannerDesktop {
+      display: none;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .title {
+      margin-top: 55px !important;
+      font-family: 'Averta';
+      font-size: 48px !important;
+    }
+    .infoContainer {
+      display: flex;
+      padding-bottom: 0;
+      overflow-y: hidden;
+    }
+    .detailImg {
+      height: 250px;
+    }
+    #infoMobile {
+      display: none;
+    }
+    #infoDesktop {
+      display: block;
+      width: 100%;
+      .col-6 {
+        display: inline-block;
+        width: 50%;
+        padding-right: 5%;
+        padding-left: 5%;
+      }
+      .teacherWrapper {
+        margin-top: 0;
+      }
+      .teacherProfile {
+        width: 11%;
+      }
+      .teacherName {
+        font-size: 28px;
+      }
+      .teacherSub {
+        font-size: 20px;
+      }
+      .workshopInfo {
+        .workshopTitle {
+          position: relative;
+          top: -40px;
+        }
+        .w-name {
+          font-size: 36px !important;
+        }
+        .type {
+          font-size: 24px;
+        }
+      }
+      .regularTxt {
+        margin-top: 20px;
+        font-size: 22px;
+      }
+    }
+    .primary {
+      @include button-big;
+    }
+    #bannerMobile {
+      display: none;
+    }
+    #bannerDesktop {
+      display: block;
+      background-position: center;
+    }
+  }
+}
 .infoContainer {
   z-index: 0;
   height: 70vh;
@@ -159,11 +292,14 @@ export default {
   overflow-y: scroll;
 }
 .workshopTitle {
+  @include title;
+
   display: block;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 2%;
+  color: $rosado-oscuro;
   .w-name {
     margin-bottom: 1%;
     font-size: 24px !important;
@@ -178,6 +314,13 @@ export default {
     font-style: italic;
     font-weight: 800;
     color: $rosado-oscuro;
+  }
+  .w-cost {
+    margin-top: 0;
+    font-family: 'Chilena-bold';
+    font-style: normal;
+    font-weight: 700;
+    color: $verde-original;
   }
 }
 .detailImg {
@@ -205,24 +348,17 @@ export default {
 .teacherName {
   @include title;
 
+  margin-bottom: 0;
   color: $rosado-original;
 }
 .teacherSub {
   @include normalText;
 
+  margin-top: 5px;
   font-weight: bold;
   color: $rosado-original;
 }
 
-// .w-type {
-//   @include title;
-
-//   font-size: 16px !important;
-//   color: $rosado-oscuro !important;
-// }
-// .costBold {
-//   font-family: 'Chilena-ExtraBold';
-// }
 .regularTxt {
   @include normalText;
 }
@@ -236,5 +372,17 @@ export default {
 }
 .primary {
   @include main-button;
+}
+
+@media (max-width: 700px) {
+  #footer {
+    display: none !important;
+  }
+}
+
+@media (min-width: 990px) {
+  #footer {
+    display: block;
+  }
 }
 </style>

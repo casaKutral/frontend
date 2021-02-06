@@ -78,7 +78,6 @@ export default {
         if (split[0] > splitToday[0]) {
         } else {
           if (splitToday[1] >= split[1]) {
-            console.log(posibleHour)
             return true
           }
         }
@@ -231,7 +230,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 .bookingCard {
   padding: 3%;
@@ -413,5 +412,11 @@ export default {
 }
 .md-clear {
   display: none;
+}
+@media (min-width: 990px) {
+  .md-dialog {
+    left: 35%;
+    max-width: 30%;
+  }
 }
 </style>

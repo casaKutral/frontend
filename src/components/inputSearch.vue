@@ -16,7 +16,12 @@ export default {
 
 <template>
   <div class="campo">
-    <input v-model="searchValue" class="input" />
+    <input
+      v-model="searchValue"
+      class="input"
+      @keyup.enter="emitSearch"
+      @keyup.delete="emitSearch"
+    />
     <button type="button" @click="emitSearch">
       <svg
         width="38"

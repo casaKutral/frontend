@@ -441,7 +441,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 //
 .md-dialog {
@@ -659,6 +659,83 @@ export default {
 
     color: $rosado-oscuro !important;
     text-transform: none;
+  }
+  .modal-title {
+    font-size: 24px;
+    color: $rosado-original;
+  }
+}
+@media (min-width: 990px) {
+  #customerModal {
+    .md-dialog {
+      top: 15%;
+      left: 30%;
+      max-width: 40%;
+    }
+    .md-dialog-container {
+      overflow-y: scroll;
+    }
+    .infoLabel {
+      padding-left: 20%;
+      margin-right: 6%;
+      font-size: 26px;
+    }
+    .infoData {
+      font-size: 26px;
+    }
+    .datesBlock {
+      width: 50%;
+    }
+    .modal-title {
+      margin-bottom: 10%;
+      font-size: 30px;
+      color: $rosado-original;
+    }
+    .check-row {
+      margin-top: 0;
+    }
+    .md-checkbox-label {
+      font-size: 20px;
+    }
+    .primary {
+      width: 200px;
+      height: 56px;
+      font-family: 'Averta';
+      font-size: 26px;
+    }
+    .btn-cancel {
+      margin-top: 10% !important;
+      margin-bottom: 20% !important;
+      margin-left: 16px !important;
+      font-size: 22px;
+    }
+    #confirmMail {
+      .modal-title {
+        width: 90%;
+      }
+      .cc-body {
+        width: 80%;
+        margin-bottom: 2%;
+        font-size: 26px;
+        line-height: normal;
+      }
+      .btn-cancel {
+        margin-top: 10% !important;
+        margin-bottom: 20% !important;
+        margin-left: 0 !important;
+        font-size: 22px;
+      }
+    }
+    #userForm {
+      .cc-body {
+        padding-left: 20%;
+      }
+    }
+    #terms {
+      .terms-text {
+        padding-left: 12%;
+      }
+    }
   }
 }
 </style>

@@ -326,7 +326,7 @@ export default {
   </Layout>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 
 @media (max-width: 600px) {
@@ -538,6 +538,9 @@ export default {
     .desktop {
       display: none !important;
     }
+    .title {
+      font-size: 22px;
+    }
   }
 }
 
@@ -643,6 +646,7 @@ export default {
               text-align: center;
               border-left: 0.5rem solid #fff;
               img {
+                width: 250px;
                 border-radius: 6px;
               }
             }
@@ -779,6 +783,7 @@ export default {
 .title {
   @include title;
 
+  font-size: 48px;
   color: $rosado-oscuro !important;
 }
 .normalText {

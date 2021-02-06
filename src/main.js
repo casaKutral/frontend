@@ -24,6 +24,7 @@ import {
   faPlusCircle,
   faChevronLeft,
   faTrashAlt,
+  faFileAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
@@ -37,6 +38,7 @@ library.add(faPlusCircle)
 library.add(faChevronLeft)
 library.add(faWhatsapp)
 library.add(faTrashAlt)
+library.add(faFileAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

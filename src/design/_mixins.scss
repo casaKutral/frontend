@@ -35,6 +35,12 @@
   border-radius: 6px;
 }
 
+@mixin button-big {
+  width: 200px;
+  height: 56px;
+  font-size: 26px;
+}
+
 @mixin secondary-button {
   display: inline-flex;
   align-items: center;

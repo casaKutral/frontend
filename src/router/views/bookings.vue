@@ -118,7 +118,7 @@ export default {
   </Layout>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 .loadingMobile {
   display: flex;

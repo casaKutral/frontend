@@ -22,11 +22,10 @@ export const actions = {
         return bookings
       })
   },
-  // https://backend.casakutral.vercel.app/api/bookings/
   updateBookings({ commit, state }, payload) {
     payload.map((id) => {
       return axios
-        .patch(`http://localhost:3000/api/bookings/${id}`, {
+        .patch(`https://backend.casakutral.vercel.app/api/bookings/${id}`, {
           status: 'Pagado',
           action: 'updateStatus',
         })

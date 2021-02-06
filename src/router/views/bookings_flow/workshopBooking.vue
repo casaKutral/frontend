@@ -107,10 +107,18 @@ export default {
 <template>
   <div>
     <MobileNavbar :show-back-button="true" @back="$emit('back')" />
-    <div v-if="workshop !== null">
+    <div v-if="workshop !== null" id="workshopBooking">
+      <div
+        id="banner"
+        class="detailImg"
+        :style="{
+          backgroundImage: `url(${workshop.pictureBanner})`,
+        }"
+      >
+      </div>
       <div class="infoContainer">
-        <p class="md-subheading sm pink">{{ workshop.type }}</p>
-        <p class="md-title pink bBottom">{{ workshop.name }}</p>
+        <p class="md-title pink">{{ workshop.name }}</p>
+        <p class="md-subheading sm pink bBottom">{{ workshop.type }}</p>
         <div class="cardsWrapper">
           <p class="w-name">Reservas</p>
           <CalendarCard
@@ -148,39 +156,88 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 
-.sm {
-  font-size: 16px !important;
-}
-.w-name {
-  margin-bottom: 15px;
-}
+#workshopBooking {
+  .sm {
+    font-size: 16px !important;
+  }
+  .w-name {
+    @include title;
 
-.pink {
-  @include title;
+    margin-bottom: 15px;
+  }
 
-  color: $rosado-original !important;
-}
-.bBottom {
-  padding-bottom: 2%;
-  border-bottom: 1px solid $rosado-oscuro;
-}
-.cardsWrapper {
-  max-height: 80vh;
-  padding-bottom: 20%;
-  margin-top: 10%;
-  overflow-y: scroll;
-}
-.second {
-  @include secondary-button;
+  .pink {
+    @include title;
 
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-.circle {
-  margin-right: 8px;
-  font-size: x-large;
+    color: $rosado-oscuro !important;
+  }
+  .bBottom {
+    padding-bottom: 2%;
+    border-bottom: 1px solid $rosado-oscuro;
+  }
+  .cardsWrapper {
+    max-height: 80vh;
+    padding-bottom: 20%;
+    margin-top: 10%;
+    overflow-y: scroll;
+  }
+  .second {
+    @include secondary-button;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+  .circle {
+    margin-right: 8px;
+    font-size: x-large;
+  }
+  @media (max-width: 700px) {
+    #banner {
+      display: none;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .infoContainer {
+      width: 30%;
+      height: fit-content;
+      min-height: 70vh;
+      padding-bottom: 0;
+      margin: auto;
+      overflow-y: hidden;
+    }
+    #banner {
+      display: block;
+    }
+    .detailImg {
+      width: 100%;
+      height: 250px;
+      margin-bottom: 3%;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-size: cover;
+    }
+    .cardsWrapper {
+      height: auto;
+      max-height: fit-content;
+      margin-top: 0;
+      overflow-y: hidden;
+    }
+    .md-title {
+      margin-bottom: 5px;
+    }
+    .w-name {
+      margin-bottom: 30px;
+    }
+    .primary {
+      @include button-big;
+    }
+    .second {
+      font-size: 22px;
+    }
+  }
 }
 </style>

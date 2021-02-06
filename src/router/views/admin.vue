@@ -30,6 +30,8 @@ export default {
     searchByMail: false,
     showTable: false,
     selectedBookings: [],
+    showModalDelete: false,
+    searchNotFound: false,
   }),
   created() {
     this.fetchBookings()
@@ -49,6 +51,7 @@ export default {
           .dispatch(`bookings/${action}`, this.selectedBookings)
           .then((response) => {
             setTimeout(() => {
+              this.showModalDelete = false
               this.fetchBookings()
             }, 5000)
           })
@@ -67,17 +70,30 @@ export default {
       }
     },
     searchBooking(searchText) {
-      this.bookings = this.bookings.filter((booking) => {
-        if (this.searchByCode) {
-          if (booking._id.includes(searchText)) {
-            return booking
+      this.showTable = false
+      this.searchNotFound = false
+      if (searchText === '') {
+        this.bookings = store.state.bookings.bookings
+        this.showTable = true
+        this.searchNotFound = false
+      } else {
+        this.bookings = this.bookings.filter((booking) => {
+          if (this.searchByCode) {
+            if (booking._id.includes(searchText)) {
+              return booking
+            }
+          } else if (this.searchByMail) {
+            if (booking.user_email.includes(searchText)) {
+              return booking
+            }
           }
-        } else if (this.searchByMail) {
-          if (booking.user_email.includes(searchText)) {
-            return booking
-          }
+        })
+        if (this.bookings.length > 0) {
+          this.showTable = true
+        } else {
+          this.searchNotFound = true
         }
-      })
+      }
     },
     saveSelection(id) {
       if (id) {
@@ -94,6 +110,12 @@ export default {
       } else {
         this.disabled = true
       }
+    },
+    hideModal() {
+      this.showModalDelete = false
+    },
+    showModal() {
+      this.showModalDelete = true
     },
   },
 }
@@ -133,7 +155,7 @@ export default {
                 :class="
                   disabled ? 'miniBtn disabled-button' : 'miniBtn trash-btn'
                 "
-                @click="updateBookings('deleteBookings')"
+                @click="showModal"
               >
                 <font-awesome-icon :icon="['fas', 'trash-alt']" />
               </button>
@@ -141,6 +163,11 @@ export default {
           </div>
           <div v-if="showTable">
             <Table :bookings="bookings" @select-booking="saveSelection" />
+          </div>
+          <div v-else-if="searchNotFound">
+            <h1 class="title not-found"
+              >No encontramos ninguna reserva con esa información</h1
+            >
           </div>
           <div v-else>
             <md-progress-spinner
@@ -153,10 +180,29 @@ export default {
         </div>
       </div>
     </div>
+    <md-dialog
+      :md-active="showModalDelete"
+      :md-fullscreen="false"
+      class="cancel-modal"
+    >
+      <md-dialog-title>
+        <h1 class="modal-title"
+          >¿Confirmas que deseas borrar estas reservas?</h1
+        >
+      </md-dialog-title>
+      <md-dialog-actions>
+        <md-button class="btn-cancel" @click="hideModal"
+          >No, quiero modificar</md-button
+        >
+        <md-button class="primary" @click="updateBookings('deleteBookings')"
+          >Sí, confirmo</md-button
+        >
+      </md-dialog-actions>
+    </md-dialog>
   </Layout>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@design';
 
 .container {
@@ -201,21 +247,53 @@ export default {
     }
   }
 }
+.md-dialog-title {
+  background-color: white;
+}
+.modal-title {
+  @include title;
+
+  width: 53%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  font-size: 36px;
+}
+
+.md-dialog-container {
+  max-width: 768px;
+}
+.md-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin: auto;
+}
+.md-dialog-actions .md-button + .md-button {
+  margin-top: 6%;
+  margin-bottom: 10%;
+  margin-left: 0;
+}
 
 .primary {
+  @include button-big;
   @include main-button;
 
   width: fit-content;
+  color: white !important;
+  text-transform: none;
   background-color: $verde-original;
 }
 .bloqueInfo {
   @include bloqueInfo;
 }
-.disabled-button {
-  @include main-button;
-  @include disabled-button;
+.btn-cancel {
+  @include button-big;
+  @include terciary-button;
 
-  width: fit-content;
+  font-size: 20px;
+  color: $rosado-oscuro !important;
+  text-transform: none;
 }
 .row {
   display: flex;
@@ -242,7 +320,15 @@ svg {
     background-color: $verde-original;
   }
 }
+.disabled-button {
+  @include disabled-button;
+}
 .disabled {
   color: #ccc;
+}
+.not-found {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
 </style>

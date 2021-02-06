@@ -1,6 +1,4 @@
 <script>
-// import store from '@state/store'
-
 export default {
   props: {
     bookings: {
@@ -10,17 +8,17 @@ export default {
   },
   data() {
     return {
-      // selectedBookings: [],
       selects: [],
       showTable: false,
       loading: false,
+      selectedBooking: {},
+      showDetailModal: false,
     }
   },
   created() {
     this.loading = true
-    // this.bookings = store.state.bookings.bookings
+    // console.log(this.bookings)
     if (this.bookings.length > 0) {
-      // console.log(this.bookings)
       this.showTable = true
       this.loading = false
       this.bookings.map((booking) => {
@@ -31,6 +29,13 @@ export default {
   methods: {
     selectBooking(_id, index) {
       this.$emit('select-booking', _id)
+    },
+    showModal(booking) {
+      this.selectedBooking = booking
+      this.showDetailModal = true
+    },
+    closeModal() {
+      this.showDetailModal = false
     },
   },
 }
@@ -72,24 +77,71 @@ export default {
             "
             >{{ booking.status }}</td
           >
-          <td
-            ><svg
-              width="30"
-              height="30"
-              viewBox="0 0 38 51"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22.1667 13.5469V0H2.375C1.05885 0 0 1.06582 0 2.39062V48.6094C0 49.9342 1.05885 51 2.375 51H35.625C36.9411 51 38 49.9342 38 48.6094V15.9375H24.5417C23.2354 15.9375 22.1667 14.8617 22.1667 13.5469ZM28.5 37.0547C28.5 37.7121 27.9656 38.25 27.3125 38.25H10.6875C10.0344 38.25 9.5 37.7121 9.5 37.0547V36.2578C9.5 35.6004 10.0344 35.0625 10.6875 35.0625H27.3125C27.9656 35.0625 28.5 35.6004 28.5 36.2578V37.0547ZM28.5 30.6797C28.5 31.3371 27.9656 31.875 27.3125 31.875H10.6875C10.0344 31.875 9.5 31.3371 9.5 30.6797V29.8828C9.5 29.2254 10.0344 28.6875 10.6875 28.6875H27.3125C27.9656 28.6875 28.5 29.2254 28.5 29.8828V30.6797ZM28.5 23.5078V24.3047C28.5 24.9621 27.9656 25.5 27.3125 25.5H10.6875C10.0344 25.5 9.5 24.9621 9.5 24.3047V23.5078C9.5 22.8504 10.0344 22.3125 10.6875 22.3125H27.3125C27.9656 22.3125 28.5 22.8504 28.5 23.5078ZM38 12.1424V12.75H25.3333V0H25.937C26.5703 0 27.174 0.249023 27.6193 0.697266L37.3073 10.459C37.7526 10.9072 38 11.5148 38 12.1424Z"
-                fill="#5177CA"
-              />
-            </svg>
+          <td>
+            <font-awesome-icon
+              class="icon"
+              :icon="['fas', 'file-alt']"
+              @click="showModal(booking)"
+            />
           </td>
         </tr>
         <!-- fin -->
       </tbody>
     </table>
+    <md-dialog
+      :md-active="showDetailModal"
+      :md-fullscreen="false"
+      class="cancel-modal"
+    >
+      <md-dialog-title>
+        <h1 class="modal-title">Detalles de la reserva</h1>
+        <p></p>
+      </md-dialog-title>
+      <div class="cc-body">
+        <div class="row">
+          <label class="infoLabel">Taller</label>
+          <label class="infoData">{{ selectedBooking.workshop_name }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Profesor</label>
+          <label class="infoData">{{ selectedBooking.teacher_name }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Fechas</label>
+          <div class="datesBlock">
+            <label
+              v-for="date in selectedBooking.dates"
+              :key="date.hour"
+              class="infoData"
+              >{{ date.date }} - {{ date.hour }}</label
+            >
+          </div>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Precio</label>
+          <label class="infoData">CLP ${{ selectedBooking.cost }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">ID</label>
+          <label class="infoData">{{ selectedBooking.shortID }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Nombre del cliente</label>
+          <label class="infoData">{{ selectedBooking.user_name }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Correo del cliente</label>
+          <label class="infoData">{{ selectedBooking.user_email }}</label>
+        </div>
+        <div class="row">
+          <label class="infoLabel">Teléfono del cliente</label>
+          <label class="infoData">{{ selectedBooking.user_phone }}</label>
+        </div>
+      </div>
+      <md-dialog-actions>
+        <md-button class="primary" @click="closeModal">OK</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>
 </template>
 
@@ -113,9 +165,8 @@ export default {
     tbody {
       background-color: white;
       border: 2px solid #f2f5f9;
-      * {
-        @include normalText;
-      }
+      @include normalText;
+
       tr {
         background-color: #f2f5f9;
         td {
@@ -154,8 +205,6 @@ export default {
               border-color: transparent;
             }
           }
-          svg {
-          }
         }
       }
       .md-checkbox .md-checkbox-container::after,
@@ -166,5 +215,84 @@ export default {
       }
     }
   }
+  .icon {
+    width: 30px;
+    height: 25px;
+    color: $azul-claro !important;
+  }
+  .title {
+    @include title;
+
+    font-size: 20px;
+    color: $azul-original;
+  }
+}
+.md-dialog-title {
+  background-color: white;
+}
+.modal-title {
+  @include title;
+
+  width: 70%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  font-size: 36px;
+}
+
+.md-dialog-container {
+  width: 550px;
+  height: 600px;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+}
+.md-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin: auto;
+}
+.md-dialog-actions .md-button + .md-button {
+  margin-top: 6%;
+  margin-bottom: 10%;
+  margin-left: 0;
+}
+.cc-body {
+  width: 100%;
+}
+.infoLabel {
+  display: inline-flex;
+  width: 35%;
+  padding-bottom: 5%;
+  padding-left: 15%;
+  font-family: 'Averta';
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 800;
+  color: $azul-oscuro;
+  text-align: left;
+}
+.infoData {
+  display: inline-flex;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  font-family: 'Chilena-regular';
+  font-size: 20px;
+  font-weight: 400;
+  color: $azul-original;
+  text-align: left;
+}
+.datesBlock {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 65%;
+  margin-bottom: 5%;
+}
+
+.primary {
+  @include button-big;
+  @include main-button;
+
+  color: white !important;
 }
 </style>

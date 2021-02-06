@@ -89,7 +89,7 @@ export default {
   span {
     display: inline-flex;
     justify-content: space-around;
-    width: 45%;
+    width: 60%;
   }
 
   li {
