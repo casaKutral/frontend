@@ -17,7 +17,6 @@ export default {
   },
   created() {
     this.loading = true
-    // console.log(this.bookings)
     if (this.bookings.length > 0) {
       this.showTable = true
       this.loading = false
@@ -27,8 +26,8 @@ export default {
     }
   },
   methods: {
-    selectBooking(_id, index) {
-      this.$emit('select-booking', _id)
+    selectBooking(_id, index, shortID) {
+      this.$emit('select-booking', _id, shortID)
     },
     showModal(booking) {
       this.selectedBooking = booking
@@ -60,7 +59,7 @@ export default {
             <md-checkbox
               v-model="selects[index]"
               class="md-primary"
-              @change="selectBooking(booking._id, index)"
+              @change="selectBooking(booking._id, index, booking.shortID)"
             >
             </md-checkbox>
           </td>

@@ -5,14 +5,8 @@ module.exports = {
     {
       id: 1,
       username: 'admin',
-      password: 'password',
-      name: 'Vue Master',
-    },
-    {
-      id: 2,
-      username: 'user1',
-      password: 'password',
-      name: 'User One',
+      password: 'kutral2020',
+      name: 'Admin Casa Kutral',
     },
   ].map((user) => {
     return {

@@ -30,7 +30,7 @@ export const actions = {
           action: 'updateStatus',
         })
         .then((response) => {
-          console.log(response)
+          // console.log(response)
         })
         .catch((err) => {
           console.error(err)
@@ -42,7 +42,7 @@ export const actions = {
       return axios
         .delete(`https://backend.casakutral.vercel.app/api/bookings/${id}`)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
         })
         .catch((err) => {
           console.error(err)

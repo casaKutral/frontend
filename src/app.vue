@@ -129,6 +129,110 @@ h6 {
   src: local('Industry'),
     url(./assets/fonts/Industry.Inc.Base.otf) format('truetype');
 }
+.md-field.md-clearable input.md-input {
+  font-family: 'Averta';
+  font-size: 18px;
+  font-weight: 800;
+  color: $azul-claro;
+  border-bottom: 2px solid $azul-original;
+  -webkit-text-fill-color: $azul-original;
+}
+.md-icon.md-theme-default.md-icon-image svg {
+  fill: $azul-claro;
+}
+.md-field.md-theme-default::after {
+  display: none !important;
+}
+.md-field.md-theme-default > .md-icon::after {
+  display: none !important;
+}
+.bookingCardFilled {
+  .md-field {
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+  .md-field.md-theme-default label {
+    font-family: 'Averta';
+    font-size: 18px;
+    font-weight: 800;
+    color: white !important;
+  }
+  .md-field.md-clearable .md-input {
+    font-family: 'Averta';
+    font-size: 18px;
+    font-weight: 800;
+    color: white !important;
+    border-bottom: 2px solid white;
+    -webkit-text-fill-color: white;
+  }
+  .md-button-content {
+    display: none;
+  }
+  .md-icon.md-theme-default.md-icon-image svg {
+    fill: white;
+  }
+}
+#customerModal {
+  .md-dialog-container {
+    width: 100%;
+    overflow-y: scroll;
+  }
+  .md-dialog-actions {
+    display: block;
+    margin: auto;
+  }
+  .md-dialog-actions .md-button + .md-button {
+    margin-top: 6%;
+    margin-bottom: 10%;
+    margin-left: 0;
+  }
+  .md-checkbox-label {
+    width: 90%;
+    font-family: 'Averta';
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 800;
+    color: $azul-oscuro;
+    a {
+      color: $azul-claro;
+    }
+  }
+  .check-row-1 {
+    padding-left: 11%;
+    label {
+      width: 100% !important;
+    }
+  }
+}
+@media (min-width: 990px) {
+  #customerModal {
+    .md-dialog {
+      top: 15%;
+      left: 30%;
+      width: 60%;
+    }
+    .md-dialog-container {
+      width: 30%;
+      overflow-y: scroll;
+    }
+    .check-row-1 {
+      padding-left: 0%;
+      label {
+        width: 100% !important;
+      }
+    }
+    #terms {
+      .chevron-left {
+        position: relative;
+        left: -22%;
+      }
+    }
+  }
+  a.whatsappBtn .whatsappIcon {
+    font-size: 40px !important;
+    color: white;
+  }
+}
 
 // ===
 // Vendor

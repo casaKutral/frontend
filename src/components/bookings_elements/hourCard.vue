@@ -12,9 +12,7 @@ export default {
   data() {
     return {}
   },
-  created: function() {
-    console.log(this.elements)
-  },
+  created: function() {},
   methods: {
     closeModal() {
       // algo

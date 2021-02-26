@@ -68,23 +68,19 @@ export const actions = {
   },
   postBooking({ commit }, payload) {
     return axios
-      .post('http://localhost:3000/api/bookings', payload)
+      .post('https://backend.casakutral.vercel.app/api/bookings', payload)
       .then((response) => {
         const booking = response
         commit('CACHE_BOOKING', booking)
         return booking
       })
+      .catch((err) => {
+        console.error(err)
+        return err
+      })
   },
   updateHours({ commit, state }, payload) {
-    const findHours = payload.dates?.map((booking) => {
-      const matchHours = state.hours.find((hour) => {
-        if (hour.date._id === booking.date.id) {
-          return hour
-        }
-      })
-      return matchHours
-    })
-    findHours.map((hour) => {
+    payload.dates.map((hour) => {
       let newCapacity
       if (
         hour?.booked?.available === 1 ||
@@ -107,7 +103,13 @@ export const actions = {
           booked: newCapacity,
         })
         .then((response) => {
-          console.log(response)
+          const updated = response
+          // console.log(response)
+          return updated
+        })
+        .catch((err) => {
+          console.error(err)
+          return err
         })
     })
   },

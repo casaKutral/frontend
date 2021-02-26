@@ -40,7 +40,6 @@ export default {
   created: function() {
     this.loading = true
     if (this.$route.query.workshopId) {
-      this.loading = false
       this.workshopsCategorys = []
     } else {
       store.dispatch('workshops/fetchWorkshops', null).then((data) => {
@@ -48,7 +47,9 @@ export default {
         this.loading = false
       })
     }
-    store.dispatch('workshops/fetchTeachers')
+    store.dispatch('workshops/fetchTeachers').then((data) => {
+      this.loading = false
+    })
   },
   methods: {
     extractCategorys: function(workshops) {

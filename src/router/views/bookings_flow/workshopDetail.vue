@@ -198,6 +198,14 @@ export default {
 @import '@design';
 
 #workshopDetail {
+  .infoContainer {
+    z-index: 0;
+    height: 70vh;
+    padding-bottom: 30vh;
+    margin-right: 5%;
+    margin-left: 5%;
+    overflow-y: scroll;
+  }
   @media (max-width: 700px) {
     .title {
       @include title;
@@ -283,14 +291,7 @@ export default {
     }
   }
 }
-.infoContainer {
-  z-index: 0;
-  height: 70vh;
-  padding-bottom: 30vh;
-  margin-right: 5%;
-  margin-left: 5%;
-  overflow-y: scroll;
-}
+
 .workshopTitle {
   @include title;
 

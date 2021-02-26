@@ -22,8 +22,8 @@ export default {
       return process.env.NODE_ENV === 'production'
         ? {}
         : {
-            username: 'Use "admin" to log in with the mock API',
-            password: 'Use "password" to log in with the mock API',
+            username: 'Escribe el usuario',
+            password: 'Escribe la contraseña',
           }
     },
   },

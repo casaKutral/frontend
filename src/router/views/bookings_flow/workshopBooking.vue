@@ -158,8 +158,28 @@ export default {
 
 <style lang="scss" scoped>
 @import '@design';
+.primary {
+  @include main-button;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 
 #workshopBooking {
+  .infoContainer {
+    z-index: 0;
+    height: 70vh;
+    padding-bottom: 30vh;
+    margin-right: 5%;
+    margin-left: 5%;
+    overflow-y: scroll;
+  }
   .sm {
     font-size: 16px !important;
   }
@@ -181,7 +201,7 @@ export default {
   .cardsWrapper {
     max-height: 80vh;
     padding-bottom: 20%;
-    margin-top: 10%;
+    margin-top: 5%;
     overflow-y: scroll;
   }
   .second {

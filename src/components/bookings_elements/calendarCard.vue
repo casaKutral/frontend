@@ -232,6 +232,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@design';
+
 .bookingCard {
   padding: 3%;
   padding-bottom: 8%;
@@ -241,28 +242,12 @@ export default {
   background-color: white;
   border: 1px solid $azul-claro;
   border-radius: 10px;
-  .md-field.md-clearable .md-input {
-    font-family: 'Averta';
-    font-size: 18px;
-    font-weight: 800;
-    color: $azul-claro;
-    border-bottom: 2px solid $azul-original;
-    -webkit-text-fill-color: $azul-original !important;
-  }
-  .md-icon.md-theme-default.md-icon-image svg {
-    fill: $azul-claro;
-  }
   .label {
     top: 20px;
     font-family: 'Chilena-Regular' !important;
+    font-size: 18px;
     font-weight: 400 !important;
     color: $gris !important;
-  }
-  label {
-    font-family: 'Averta';
-    font-size: 18px;
-    font-weight: 800;
-    color: $azul-original !important;
   }
   .hourBtn {
     font-family: 'Averta';
@@ -270,6 +255,17 @@ export default {
     font-weight: 800;
     color: $azul-original;
   }
+}
+.md-field.md-clearable input.md-input {
+  font-family: 'Averta';
+  font-size: 18px;
+  font-weight: 800;
+  color: $azul-claro;
+  border-bottom: 2px solid $azul-original !important;
+  -webkit-text-fill-color: $azul-original !important;
+}
+.md-icon.md-theme-default.md-icon-image svg {
+  fill: $azul-claro;
 }
 .md-field.md-theme-default::after {
   display: none !important;

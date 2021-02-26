@@ -174,20 +174,21 @@ export default {
         if (response.status >= 200 && response.status <= 300) {
           this.showSuccess = true
           this.showUserDataForm = false
-          store.dispatch('workshops/updateHours', booking)
-          if (action === 'updateUser') {
-            const bookingId = [
-              ...this.savedUser.bookings_ids,
-              response.data._id,
-            ]
-            store.dispatch('users/updateUser', bookingId)
-          } else if (action === 'addUser') {
-            newUser.bookings_ids = [response.data._id]
-            store.dispatch('users/createUser', newUser)
-          } else if (action === 'noAddUser') {
-            // no hacer nada con el usuario
-          }
-          this.loading = false
+          store.dispatch('workshops/updateHours', booking).then((updated) => {
+            if (action === 'updateUser') {
+              const bookingId = [
+                ...this.savedUser.bookings_ids,
+                response.data._id,
+              ]
+              store.dispatch('users/updateUser', bookingId)
+            } else if (action === 'addUser') {
+              newUser.bookings_ids = [response.data._id]
+              store.dispatch('users/createUser', newUser)
+            } else if (action === 'noAddUser') {
+              // no hacer nada con el usuario
+            }
+            this.loading = false
+          })
         } else {
           this.showError = true
           this.failCode = response.status
@@ -236,7 +237,7 @@ export default {
             <label class="infoData">CLP ${{ totalValue }}</label>
           </div>
         </div>
-        <div class="check-row">
+        <div class="check-row check-row-1">
           <md-checkbox v-model="acceptTerms" class="md-primary"
             >Acepto los
             <a @click="showTerms">términos y condiciones</a>
@@ -444,9 +445,10 @@ export default {
 <style lang="scss" scoped>
 @import '@design';
 //
-.md-dialog {
-  max-width: 768px;
+.primary {
+  @include main-button;
 }
+
 #customerModal {
   .cc-body {
     width: 100%;
@@ -455,10 +457,15 @@ export default {
     background-color: white;
   }
   .modal-title {
-    width: 75%;
+    width: 70%;
     margin: auto;
     margin-top: 5%;
     margin-bottom: 20%;
+    font-family: 'Averta';
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 800;
+    text-align: center;
   }
   .col-4 {
     display: inline-block;
@@ -521,6 +528,12 @@ export default {
     margin-top: 6%;
     margin-bottom: 3%;
   }
+  .check-row-1 {
+    padding-left: 0%;
+    label {
+      width: 100% !important;
+    }
+  }
   .md-checkbox-label {
     font-family: 'Averta';
     font-size: 16px;
@@ -554,13 +567,13 @@ export default {
   }
   .chevron-left {
     position: relative;
-    left: -11%;
+    left: -7%;
   }
   #userForm {
     .modal-title {
       display: flex;
       justify-content: flex-start;
-      width: 85%;
+      width: 91%;
       margin: auto;
       margin-top: 0%;
       margin-bottom: 0%;
@@ -568,8 +581,8 @@ export default {
     .cc-body {
       justify-content: flex-start;
       width: 100%;
-      padding-right: 8%;
-      padding-left: 10%;
+      padding-right: 0%;
+      padding-left: 11%;
     }
     .infoLabel {
       width: 100%;
@@ -577,9 +590,9 @@ export default {
       padding-left: 0%;
     }
     .check-row {
-      padding-left: 5%;
+      padding-left: 11%;
       margin-top: 0;
-      margin-bottom: 0;
+      margin-bottom: 5%;
     }
     ._base-input-text_input_cKPEQ {
       width: 90%;
@@ -670,25 +683,25 @@ export default {
     .md-dialog {
       top: 15%;
       left: 30%;
-      max-width: 40%;
+      max-width: 50%;
     }
     .md-dialog-container {
       overflow-y: scroll;
     }
     .infoLabel {
-      padding-left: 20%;
+      padding-left: 24%;
       margin-right: 6%;
-      font-size: 26px;
+      font-size: 20px;
     }
     .infoData {
-      font-size: 26px;
+      font-size: 20px;
     }
     .datesBlock {
       width: 50%;
     }
     .modal-title {
       margin-bottom: 10%;
-      font-size: 30px;
+      font-size: 25px;
       color: $rosado-original;
     }
     .check-row {
@@ -709,9 +722,24 @@ export default {
       margin-left: 16px !important;
       font-size: 22px;
     }
+    .check-row-1 {
+      padding-left: 0%;
+      label {
+        width: 100% !important;
+      }
+    }
+    #userForm {
+      .check-row {
+        padding-left: 0%;
+      }
+    }
     #confirmMail {
       .modal-title {
         width: 90%;
+      }
+      .chevron-left {
+        position: relative;
+        left: -14%;
       }
       .cc-body {
         width: 80%;

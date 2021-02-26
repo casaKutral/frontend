@@ -65,7 +65,7 @@ export const actions = {
         }
       )
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         const updatedUser = response.data
         return updatedUser
       })

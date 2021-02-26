@@ -32,6 +32,7 @@ export default {
     selectedBookings: [],
     showModalDelete: false,
     searchNotFound: false,
+    selectedShortID: [],
   }),
   created() {
     this.fetchBookings()
@@ -41,7 +42,6 @@ export default {
       store.dispatch('bookings/fetchBookings').then((response) => {
         this.bookings = response
         this.showTable = true
-        console.log(this.bookings)
       })
     },
     updateBookings(action) {
@@ -95,13 +95,15 @@ export default {
         }
       }
     },
-    saveSelection(id) {
+    saveSelection(id, shortID) {
       if (id) {
         const index = this.selectedBookings.indexOf(id)
         if (index === -1) {
           this.selectedBookings.push(id)
+          this.selectedShortID.push(shortID)
         } else {
           this.selectedBookings.splice(index, 1)
+          this.selectedShortID.splice(index, 1)
         }
       }
       console.log(this.selectedBookings)
@@ -190,6 +192,9 @@ export default {
           >¿Confirmas que deseas borrar estas reservas?</h1
         >
       </md-dialog-title>
+      <div class="row confirm-ids">
+        <p v-for="id in selectedShortID" :key="id">{{ id }}</p>
+      </div>
       <md-dialog-actions>
         <md-button class="btn-cancel" @click="hideModal"
           >No, quiero modificar</md-button
@@ -253,11 +258,12 @@ export default {
 .modal-title {
   @include title;
 
-  width: 53%;
+  width: 100%;
   margin: auto;
   margin-top: 5%;
   margin-bottom: 0%;
-  font-size: 36px;
+  font-size: 26px;
+  text-align: center;
 }
 
 .md-dialog-container {
@@ -266,7 +272,7 @@ export default {
 .md-dialog-actions {
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 .md-dialog-actions .md-button + .md-button {
@@ -301,6 +307,18 @@ export default {
   width: 100%;
   &.containerBtns {
     justify-content: space-between;
+  }
+  &.confirm-ids {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 75%;
+    margin: auto;
+    p {
+      @include normalText;
+
+      display: flex;
+      width: 35%;
+    }
   }
 }
 .title {
