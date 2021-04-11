@@ -1,9 +1,9 @@
 <script>
 import NavBar from '@components/nav-bar.vue'
-import BottomNavbar from '@components/bottomNavbar.vue'
+// import BottomNavbar from '@components/bottomNavbar.vue'
 
 export default {
-  components: { NavBar, BottomNavbar },
+  components: { NavBar },
 }
 </script>
 
@@ -11,7 +11,7 @@ export default {
   <div>
     <NavBar />
     <slot />
-    <BottomNavbar />
+    <!-- <BottomNavbar /> -->
   </div>
 </template>
 

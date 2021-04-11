@@ -107,7 +107,7 @@ export default {
 <template>
   <div>
     <MobileNavbar :show-back-button="true" @back="$emit('back')" />
-    <div v-if="workshop !== null" id="workshopBooking">
+    <div v-if="workshop !== null" id="workshopBooking" class="background">
       <div
         id="banner"
         class="detailImg"
@@ -229,6 +229,7 @@ export default {
       margin: auto;
       overflow-y: hidden;
     }
+
     #banner {
       display: block;
     }

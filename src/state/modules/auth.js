@@ -24,20 +24,24 @@ export const actions = {
   // starts, along with any other actions named `init` in other modules.
   init({ state, dispatch }) {
     setDefaultAuthHeaders(state)
-    dispatch('validate')
+    // dispatch('validate')
   },
 
   // Logs in the current user.
   logIn({ commit, dispatch, getters }, { username, password } = {}) {
-    if (getters.loggedIn) return dispatch('validate')
+    // if (getters.loggedIn) return dispatch('validate')
 
-    return axios
-      .post('/api/session', { username, password })
-      .then((response) => {
-        const user = response.data
-        commit('SET_CURRENT_USER', user)
-        return user
-      })
+    return axios.get('http://localhost:3000/api/admin').then((response) => {
+      if (response.status === 200) {
+        const admin = response.data[0]
+        if (admin.username === username && admin.password === password) {
+          commit('SET_CURRENT_USER', admin)
+          return admin
+        }
+      } else {
+        commit('SET_CURRENT_USER', null)
+      }
+    })
   },
 
   // Logs out the current user.
@@ -48,23 +52,27 @@ export const actions = {
   // Validates the current user's token and refreshes it
   // with new data from the API.
   validate({ commit, state }) {
-    if (!state.currentUser) return Promise.resolve(null)
+    if (!state.currentUser) {
+      return Promise.resolve(null)
+    } else {
+      return state.currentUser
+    }
 
-    return axios
-      .get('/api/session')
-      .then((response) => {
-        const user = response.data
-        commit('SET_CURRENT_USER', user)
-        return user
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          commit('SET_CURRENT_USER', null)
-        } else {
-          console.warn(error)
-        }
-        return null
-      })
+    // return axios
+    //   .get('/api/session')
+    //   .then((response) => {
+    //     const user = response.data
+    //     commit('SET_CURRENT_USER', user)
+    //     return user
+    //   })
+    //   .catch((error) => {
+    //     if (error.response && error.response.status === 401) {
+    //       commit('SET_CURRENT_USER', null)
+    //     } else {
+    //       console.warn(error)
+    //     }
+    //     return null
+    //   })
   },
 }
 

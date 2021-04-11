@@ -106,7 +106,7 @@ export default {
           this.selectedShortID.splice(index, 1)
         }
       }
-      console.log(this.selectedBookings)
+      // console.log(this.selectedBookings)
       if (this.selectedBookings.length > 0) {
         this.disabled = false
       } else {

@@ -4,7 +4,7 @@ import appConfig from '@src/app.config'
 import Layout from '@layouts/main.vue'
 import Footer from '@components/footer.vue'
 import { Carousel, Slide } from 'vue-carousel'
-import store from '@state/store'
+// import store from '@state/store'
 
 export default {
   page: {
@@ -15,12 +15,21 @@ export default {
   data() {
     return {
       workshops: [],
+      showModal: false,
     }
   },
   created() {
-    store.dispatch('workshops/fetchWorkshops').then((data) => {
-      this.workshops = data
-    })
+    // store.dispatch('workshops/fetchWorkshops').then((data) => {
+    //   this.workshops = data
+    // })
+  },
+  methods: {
+    showCartaModal() {
+      this.showModal = true
+    },
+    closeCartaModal() {
+      this.showModal = false
+    },
   },
 }
 </script>
@@ -83,7 +92,7 @@ export default {
       <div class="titleWrapper">
         <h1 class="title desktop">Hola! somos Casa Kutral</h1>
       </div>
-      <div class="bloqueInfo sectionAboutUs">
+      <div class="bloqueInfo sectionAboutUs" style="margin-bottom: 15%;">
         <div class="about">
           <div class="item-flex desktop">
             <img
@@ -108,13 +117,65 @@ export default {
           </div>
         </div>
       </div>
-      <div class="bloqueInfo sectionBannerEnergiaCreadora">
+      <div class="bloqueInfo sectionBannerSeparador">
         <h2 class="title-shadow">
           <span>Todos portamos un kutral,</span><br />
           <span>nuestra energía creadora. </span>
         </h2>
       </div>
-      <div class="bloqueInfo sectionCards">
+      <div class="como-pedir">
+        <h1 class="title">¿Cómo pido?</h1>
+        <p class="textAbout">
+          Para hacer tu pedido revisa nuestra carta haciendo click en la imagen
+          de abajo.
+        </p>
+        <p class="textAbout">
+          Cúando te decidas puedes agendar tu pedido a nuestro whatsapp.
+        </p>
+      </div>
+      <div class="cartaWrapper">
+        <img
+          class="cartaPreview"
+          src="../../assets/images/carta/carta_0.png"
+          @click="showCartaModal"
+        />
+      </div>
+      <md-dialog
+        :md-active="showModal"
+        :md-fullscreen="true"
+        class="cartaModal"
+      >
+        <md-dialog-actions>
+          <md-button class="btn-cancel close-btn" @click="closeCartaModal"
+            >X</md-button
+          >
+        </md-dialog-actions>
+        <Carousel
+          :per-page="1"
+          :autoplay="false"
+          :speed="700"
+          :loop="false"
+          :pagination-size="0"
+          :navigation-enabled="true"
+        >
+          <Slide class="carruselSlide">
+            <img class="" src="../../assets/images/carta/carta_1.png" />
+          </Slide>
+          <Slide class="carruselSlide">
+            <img class="" src="../../assets/images/carta/carta_2.png" />
+          </Slide>
+          <Slide class="carruselSlide">
+            <img class="" src="../../assets/images/carta/carta_3.png" />
+          </Slide>
+        </Carousel>
+      </md-dialog>
+      <!-- <div class="bloqueInfo sectionBannerEnergiaCreadora">
+        <h2 class="title-shadow">
+          <span>Todos portamos un kutral,</span><br />
+          <span>nuestra energía creadora. </span>
+        </h2>
+      </div> -->
+      <!-- <div class="bloqueInfo sectionCards">
         <div class="cardContainer">
           <div class="card actividades item-flex">
             <p class="italicText title">Actividades</p>
@@ -308,8 +369,8 @@ export default {
             </button>
           </div>
         </div>
-      </div>
-      <div class="bloqueInfo sectionMapa">
+      </div> -->
+      <!-- <div class="bloqueInfo sectionMapa">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.6204938330316!2d-71.49539088486375!3d-32.72271078098849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689bf3b3cf3349f%3A0xc6af07c2b30e3de5!2sAv%20Central%2C%20Puchuncavi%2C%20Puchuncav%C3%AD%2C%20Valpara%C3%ADso!5e0!3m2!1ses!2scl!4v1611623559624!5m2!1ses!2scl"
           width="1440"
@@ -320,7 +381,7 @@ export default {
           aria-hidden="false"
           tabindex="0"
         ></iframe>
-      </div>
+      </div> -->
     </div>
     <Footer />
   </Layout>
@@ -336,6 +397,18 @@ export default {
     .banner {
       width: 100%;
       margin-bottom: 2%;
+    }
+    .como-pedir {
+      text-align: center;
+      .textAbout {
+        @include normalText;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem;
+        line-height: 28.8px;
+      }
     }
 
     .sectionCarrusel {
@@ -541,6 +614,24 @@ export default {
     .title {
       font-size: 22px;
     }
+    .cartaWrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10%;
+      margin-bottom: 20%;
+      .cartaPreview {
+        width: 70%;
+      }
+    }
+    .cartaModal {
+      .carruselSlide {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 85vh;
+      }
+    }
   }
 }
 
@@ -558,6 +649,15 @@ export default {
         img {
           width: 100vw;
         }
+      }
+    }
+    .como-pedir {
+      .textAbout {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem;
+        line-height: 28.8px;
       }
     }
 
@@ -750,6 +850,27 @@ export default {
 
 @media (min-width: 1200px) {
   .home {
+    .como-pedir {
+      text-align: center;
+      .textAbout {
+        @include normalText;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem;
+        line-height: 28.8px;
+      }
+    }
+    .cartaWrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 5%;
+      .cartaPreview {
+        width: 25%;
+      }
+    }
     .bloqueInfo {
       @include bloqueInfo;
       .about {

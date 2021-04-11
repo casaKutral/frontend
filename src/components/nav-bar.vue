@@ -7,18 +7,18 @@ export default {
   data() {
     return {
       persistentNavRoutes: [
-        {
-          name: 'home',
-          title: 'Home',
-        },
-        {
-          name: 'Actividades',
-          title: 'Actividades',
-        },
-        {
-          name: 'Cocina',
-          title: 'Cocina',
-        },
+        // {
+        //   name: 'home',
+        //   title: 'Home',
+        // },
+        // {
+        //   name: 'Actividades',
+        //   title: 'Actividades',
+        // },
+        // {
+        //   name: 'Cocina',
+        //   title: 'Cocina',
+        // },
         // {
         //   name: 'Catalogo de productos',
         //   title: 'Catalogo de productos',
@@ -58,7 +58,7 @@ export default {
       <a
         class="whatsappBtn"
         target="blank"
-        href="https://api.whatsapp.com/send?phone=+56948628194"
+        href="https://api.whatsapp.com/send?phone=+56949380469"
       >
         <font-awesome-icon class="whatsappIcon" :icon="['fab', 'whatsapp']" />
       </a>
@@ -89,7 +89,7 @@ export default {
   span {
     display: inline-flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 60%;
   }
 

@@ -31,7 +31,7 @@ export default {
     <a
       class="whatsappBtn"
       target="blank"
-      href="https://api.whatsapp.com/send?phone=+56948628194"
+      href="https://api.whatsapp.com/send?phone=+56949380469"
     >
       <font-awesome-icon class="whatsappIcon" :icon="['fab', 'whatsapp']" />
     </a>

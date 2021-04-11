@@ -138,6 +138,7 @@
 
 @media (max-width: 600px) {
   .footer {
+    bottom: 0;
     width: 100vw;
     padding: 5% 5% 25% 5%;
     background-color: $azul-oscuro;

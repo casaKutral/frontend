@@ -204,7 +204,25 @@ h6 {
     }
   }
 }
+.cartaModal {
+  .close-btn {
+    top: 65px;
+    font-size: xx-large;
+    color: $rosado-oscuro;
+  }
+  .carruselSlide {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 85vh;
+  }
+}
 @media (min-width: 990px) {
+  .background {
+    background-image: url('./assets/images/desktop/chispitas.png');
+    background-position: center;
+    background-size: cover;
+  }
   #customerModal {
     .md-dialog {
       top: 15%;
@@ -231,6 +249,18 @@ h6 {
   a.whatsappBtn .whatsappIcon {
     font-size: 40px !important;
     color: white;
+  }
+  .cartaModal {
+    .md-dialog-container {
+      max-height: 100%;
+    }
+    .carruselSlide {
+      justify-content: center;
+      width: 250px;
+      img {
+        max-width: 80%;
+      }
+    }
   }
 }
 

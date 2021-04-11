@@ -54,8 +54,10 @@ export default {
   @extend %typography-small;
 
   display: block;
-  width: 100%;
+  width: 60%;
   padding: $size-input-padding-vertical $size-input-padding-horizontal;
+  margin: auto;
+  margin-top: 25px;
   margin-bottom: $size-grid-padding;
   line-height: 1;
   border: $size-input-border solid $color-input-border;
